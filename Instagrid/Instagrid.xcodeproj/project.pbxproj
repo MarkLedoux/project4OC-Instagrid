@@ -7,25 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B3678BDE230C460B000BEED9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3678BDD230C460B000BEED9 /* AppDelegate.swift */; };
-		B3678BE0230C460B000BEED9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3678BDF230C460B000BEED9 /* ViewController.swift */; };
-		B3678BE3230C460B000BEED9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3678BE1230C460B000BEED9 /* Main.storyboard */; };
-		B3678BE5230C460C000BEED9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3678BE4230C460C000BEED9 /* Assets.xcassets */; };
-		B3678BE8230C460C000BEED9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3678BE6230C460C000BEED9 /* LaunchScreen.storyboard */; };
+		B3678BFC230C481A000BEED9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3678BFB230C481A000BEED9 /* AppDelegate.swift */; };
+		B3678BFE230C481A000BEED9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3678BFD230C481A000BEED9 /* ViewController.swift */; };
+		B3678C01230C481A000BEED9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3678BFF230C481A000BEED9 /* Main.storyboard */; };
+		B3678C03230C481B000BEED9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3678C02230C481B000BEED9 /* Assets.xcassets */; };
+		B3678C06230C481B000BEED9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3678C04230C481B000BEED9 /* LaunchScreen.storyboard */; };
+		B3DC4348230C5A8D00DD10CF /* Delm-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3DC4346230C5A8D00DD10CF /* Delm-Medium.otf */; };
+		B3DC4349230C5A8D00DD10CF /* ThirstySoftRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3DC4347230C5A8D00DD10CF /* ThirstySoftRegular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B3678BDA230C460B000BEED9 /* Instagrid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagrid.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3678BDD230C460B000BEED9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B3678BDF230C460B000BEED9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B3678BE2230C460B000BEED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B3678BE4230C460C000BEED9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B3678BE7230C460C000BEED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B3678BE9230C460C000BEED9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3678BF8230C481A000BEED9 /* Instagrid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagrid.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3678BFB230C481A000BEED9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B3678BFD230C481A000BEED9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B3678C00230C481A000BEED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B3678C02230C481B000BEED9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B3678C05230C481B000BEED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B3678C07230C481B000BEED9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3DC4346230C5A8D00DD10CF /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Delm-Medium.otf"; path = "../Delm-Medium.otf"; sourceTree = "<group>"; };
+		B3DC4347230C5A8D00DD10CF /* ThirstySoftRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ThirstySoftRegular.otf; path = ../ThirstySoftRegular.otf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B3678BD7230C460B000BEED9 /* Frameworks */ = {
+		B3678BF5230C481A000BEED9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -35,31 +39,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B3678BD1230C460B000BEED9 = {
+		B3678BEF230C481A000BEED9 = {
 			isa = PBXGroup;
 			children = (
-				B3678BDC230C460B000BEED9 /* Instagrid */,
-				B3678BDB230C460B000BEED9 /* Products */,
+				B3678BFA230C481A000BEED9 /* Instagrid */,
+				B3678BF9230C481A000BEED9 /* Products */,
+				B3DC4346230C5A8D00DD10CF /* Delm-Medium.otf */,
+				B3DC4347230C5A8D00DD10CF /* ThirstySoftRegular.otf */,
 			);
 			sourceTree = "<group>";
 		};
-		B3678BDB230C460B000BEED9 /* Products */ = {
+		B3678BF9230C481A000BEED9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B3678BDA230C460B000BEED9 /* Instagrid.app */,
+				B3678BF8230C481A000BEED9 /* Instagrid.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B3678BDC230C460B000BEED9 /* Instagrid */ = {
+		B3678BFA230C481A000BEED9 /* Instagrid */ = {
 			isa = PBXGroup;
 			children = (
-				B3678BDD230C460B000BEED9 /* AppDelegate.swift */,
-				B3678BDF230C460B000BEED9 /* ViewController.swift */,
-				B3678BE1230C460B000BEED9 /* Main.storyboard */,
-				B3678BE4230C460C000BEED9 /* Assets.xcassets */,
-				B3678BE6230C460C000BEED9 /* LaunchScreen.storyboard */,
-				B3678BE9230C460C000BEED9 /* Info.plist */,
+				B3678BFB230C481A000BEED9 /* AppDelegate.swift */,
+				B3678BFD230C481A000BEED9 /* ViewController.swift */,
+				B3678BFF230C481A000BEED9 /* Main.storyboard */,
+				B3678C02230C481B000BEED9 /* Assets.xcassets */,
+				B3678C04230C481B000BEED9 /* LaunchScreen.storyboard */,
+				B3678C07230C481B000BEED9 /* Info.plist */,
 			);
 			path = Instagrid;
 			sourceTree = "<group>";
@@ -67,13 +73,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B3678BD9230C460B000BEED9 /* Instagrid */ = {
+		B3678BF7230C481A000BEED9 /* Instagrid */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B3678BEC230C460C000BEED9 /* Build configuration list for PBXNativeTarget "Instagrid" */;
+			buildConfigurationList = B3678C0A230C481B000BEED9 /* Build configuration list for PBXNativeTarget "Instagrid" */;
 			buildPhases = (
-				B3678BD6230C460B000BEED9 /* Sources */,
-				B3678BD7230C460B000BEED9 /* Frameworks */,
-				B3678BD8230C460B000BEED9 /* Resources */,
+				B3678BF4230C481A000BEED9 /* Sources */,
+				B3678BF5230C481A000BEED9 /* Frameworks */,
+				B3678BF6230C481A000BEED9 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -81,25 +87,25 @@
 			);
 			name = Instagrid;
 			productName = Instagrid;
-			productReference = B3678BDA230C460B000BEED9 /* Instagrid.app */;
+			productReference = B3678BF8230C481A000BEED9 /* Instagrid.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B3678BD2230C460B000BEED9 /* Project object */ = {
+		B3678BF0230C481A000BEED9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1030;
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = "Mark LEDOUX";
 				TargetAttributes = {
-					B3678BD9230C460B000BEED9 = {
+					B3678BF7230C481A000BEED9 = {
 						CreatedOnToolsVersion = 10.3;
 					};
 				};
 			};
-			buildConfigurationList = B3678BD5230C460B000BEED9 /* Build configuration list for PBXProject "Instagrid" */;
+			buildConfigurationList = B3678BF3230C481A000BEED9 /* Build configuration list for PBXProject "Instagrid" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -107,54 +113,56 @@
 				en,
 				Base,
 			);
-			mainGroup = B3678BD1230C460B000BEED9;
-			productRefGroup = B3678BDB230C460B000BEED9 /* Products */;
+			mainGroup = B3678BEF230C481A000BEED9;
+			productRefGroup = B3678BF9230C481A000BEED9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B3678BD9230C460B000BEED9 /* Instagrid */,
+				B3678BF7230C481A000BEED9 /* Instagrid */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B3678BD8230C460B000BEED9 /* Resources */ = {
+		B3678BF6230C481A000BEED9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3678BE8230C460C000BEED9 /* LaunchScreen.storyboard in Resources */,
-				B3678BE5230C460C000BEED9 /* Assets.xcassets in Resources */,
-				B3678BE3230C460B000BEED9 /* Main.storyboard in Resources */,
+				B3678C06230C481B000BEED9 /* LaunchScreen.storyboard in Resources */,
+				B3678C03230C481B000BEED9 /* Assets.xcassets in Resources */,
+				B3DC4349230C5A8D00DD10CF /* ThirstySoftRegular.otf in Resources */,
+				B3DC4348230C5A8D00DD10CF /* Delm-Medium.otf in Resources */,
+				B3678C01230C481A000BEED9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B3678BD6230C460B000BEED9 /* Sources */ = {
+		B3678BF4230C481A000BEED9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3678BE0230C460B000BEED9 /* ViewController.swift in Sources */,
-				B3678BDE230C460B000BEED9 /* AppDelegate.swift in Sources */,
+				B3678BFE230C481A000BEED9 /* ViewController.swift in Sources */,
+				B3678BFC230C481A000BEED9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B3678BE1230C460B000BEED9 /* Main.storyboard */ = {
+		B3678BFF230C481A000BEED9 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B3678BE2230C460B000BEED9 /* Base */,
+				B3678C00230C481A000BEED9 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		B3678BE6230C460C000BEED9 /* LaunchScreen.storyboard */ = {
+		B3678C04230C481B000BEED9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B3678BE7230C460C000BEED9 /* Base */,
+				B3678C05230C481B000BEED9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -162,7 +170,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		B3678BEA230C460C000BEED9 /* Debug */ = {
+		B3678C08230C481B000BEED9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -223,7 +231,7 @@
 			};
 			name = Debug;
 		};
-		B3678BEB230C460C000BEED9 /* Release */ = {
+		B3678C09230C481B000BEED9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -278,7 +286,7 @@
 			};
 			name = Release;
 		};
-		B3678BED230C460C000BEED9 /* Debug */ = {
+		B3678C0B230C481B000BEED9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -296,7 +304,7 @@
 			};
 			name = Debug;
 		};
-		B3678BEE230C460C000BEED9 /* Release */ = {
+		B3678C0C230C481B000BEED9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -317,25 +325,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B3678BD5230C460B000BEED9 /* Build configuration list for PBXProject "Instagrid" */ = {
+		B3678BF3230C481A000BEED9 /* Build configuration list for PBXProject "Instagrid" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B3678BEA230C460C000BEED9 /* Debug */,
-				B3678BEB230C460C000BEED9 /* Release */,
+				B3678C08230C481B000BEED9 /* Debug */,
+				B3678C09230C481B000BEED9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B3678BEC230C460C000BEED9 /* Build configuration list for PBXNativeTarget "Instagrid" */ = {
+		B3678C0A230C481B000BEED9 /* Build configuration list for PBXNativeTarget "Instagrid" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B3678BED230C460C000BEED9 /* Debug */,
-				B3678BEE230C460C000BEED9 /* Release */,
+				B3678C0B230C481B000BEED9 /* Debug */,
+				B3678C0C230C481B000BEED9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B3678BD2230C460B000BEED9 /* Project object */;
+	rootObject = B3678BF0230C481A000BEED9 /* Project object */;
 }
