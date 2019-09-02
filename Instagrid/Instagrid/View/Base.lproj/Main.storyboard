@@ -140,6 +140,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <variation key="heightClass=compact" axis="vertical"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.58823529411764708" green="0.69411764705882351" blue="0.73725490196078436" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -169,9 +170,10 @@
                             <constraint firstItem="5Ym-cW-p15" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="bHq-4N-qGQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kPc-X5-Zpe" secondAttribute="bottom" constant="20" id="gFa-hw-Bgi"/>
                             <constraint firstItem="kPc-X5-Zpe" firstAttribute="leading" secondItem="5Ym-cW-p15" secondAttribute="trailing" constant="40" id="hPU-Nf-P0W">
-                                <variation key="heightClass=compact" constant="80"/>
+                                <variation key="heightClass=compact" constant="45"/>
                             </constraint>
                             <constraint firstItem="5Ym-cW-p15" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="pqp-WK-Tnv"/>
+                            <constraint firstItem="5Ym-cW-p15" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qCV-im-r0A"/>
                             <constraint firstItem="5Ym-cW-p15" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="qrE-B7-YJA"/>
                             <constraint firstItem="IrF-uH-HNM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vKp-5h-2w4"/>
                             <constraint firstItem="5Ym-cW-p15" firstAttribute="top" secondItem="IrF-uH-HNM" secondAttribute="bottom" constant="10" id="vl2-wL-tqr"/>
@@ -184,14 +186,15 @@
                                 <exclude reference="GU0-yy-IV3"/>
                                 <exclude reference="gFa-hw-Bgi"/>
                                 <exclude reference="vq9-K3-O8a"/>
+                                <exclude reference="PvV-h9-AXW"/>
+                                <exclude reference="aSK-3b-XuY"/>
                                 <exclude reference="41A-DY-nwl"/>
                                 <exclude reference="U0t-sA-b1b"/>
                                 <exclude reference="Vcm-KC-7Lf"/>
                                 <exclude reference="bHq-4N-qGQ"/>
                                 <exclude reference="pqp-WK-Tnv"/>
+                                <exclude reference="qCV-im-r0A"/>
                                 <exclude reference="vl2-wL-tqr"/>
-                                <exclude reference="PvV-h9-AXW"/>
-                                <exclude reference="aSK-3b-XuY"/>
                                 <exclude reference="5YY-A6-AEf"/>
                                 <exclude reference="QK3-3M-dgO"/>
                                 <exclude reference="hPU-Nf-P0W"/>
@@ -206,6 +209,9 @@
                                 <exclude reference="b3I-sM-2CT"/>
                                 <include reference="gFa-hw-Bgi"/>
                                 <include reference="vq9-K3-O8a"/>
+                                <include reference="PvV-h9-AXW"/>
+                                <exclude reference="WCf-C9-PGZ"/>
+                                <include reference="aSK-3b-XuY"/>
                                 <exclude reference="41A-DY-nwl"/>
                                 <exclude reference="4T5-lY-ej8"/>
                                 <exclude reference="U0t-sA-b1b"/>
@@ -213,15 +219,13 @@
                                 <exclude reference="Vcm-KC-7Lf"/>
                                 <exclude reference="bHq-4N-qGQ"/>
                                 <exclude reference="pqp-WK-Tnv"/>
+                                <include reference="qCV-im-r0A"/>
                                 <exclude reference="qrE-B7-YJA"/>
                                 <include reference="vl2-wL-tqr"/>
-                                <include reference="PvV-h9-AXW"/>
-                                <exclude reference="WCf-C9-PGZ"/>
-                                <include reference="aSK-3b-XuY"/>
                                 <include reference="5YY-A6-AEf"/>
                                 <exclude reference="QK3-3M-dgO"/>
                                 <exclude reference="RIu-OG-aVL"/>
-                                <include reference="hPU-Nf-P0W"/>
+                                <exclude reference="hPU-Nf-P0W"/>
                             </mask>
                         </variation>
                         <connections>
