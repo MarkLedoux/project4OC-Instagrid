@@ -32,13 +32,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="QUP-a9-E2k" userLabel="SwipeUp">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="QUP-a9-E2k" userLabel="Swipe">
                                 <rect key="frame" x="92.5" y="102.5" width="135.5" height="36.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow Up" translatesAutoresizingMaskIntoConstraints="NO" id="cSl-X5-EOa">
                                         <rect key="frame" x="60.5" y="0.0" width="14" height="10"/>
+                                        <variation key="heightClass=compact" image="Arrow Left"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Swipe up to share" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="160" translatesAutoresizingMaskIntoConstraints="NO" id="akO-kD-Ykk">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Swipe up to share" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="160" translatesAutoresizingMaskIntoConstraints="NO" id="akO-kD-Ykk">
                                         <rect key="frame" x="0.0" y="12" width="135.5" height="24.5"/>
                                         <fontDescription key="fontDescription" name="Delm-Medium" family="Delm" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -64,6 +65,9 @@
                                                         <rect key="frame" x="130" y="0.0" width="120" height="120"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
+                                                        <connections>
+                                                            <action selector="firstLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vNp-ts-ip6"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.062745098040000002" green="0.40000000000000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -127,16 +131,22 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iaS-Xt-g9b">
                                         <rect key="frame" x="0.0" y="0.0" width="86.5" height="80"/>
                                         <state key="normal" image="Layout 1"/>
+                                        <connections>
+                                            <action selector="firstLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6cT-sw-OHA"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuM-EM-c9y">
                                         <rect key="frame" x="91.5" y="0.0" width="87" height="80"/>
                                         <state key="normal" image="Layout 2"/>
+                                        <connections>
+                                            <action selector="secondLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lbW-qF-u1w"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aza-Am-KRz">
                                         <rect key="frame" x="183.5" y="0.0" width="86.5" height="80"/>
                                         <state key="normal" image="Layout 3"/>
                                         <connections>
-                                            <action selector="thirdLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JNG-ez-gX4"/>
+                                            <action selector="thirdLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cz3-Dc-5QQ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -150,6 +160,7 @@
                             <constraint firstAttribute="bottom" secondItem="5Ym-cW-p15" secondAttribute="bottom" constant="20" id="41A-DY-nwl"/>
                             <constraint firstItem="5Ym-cW-p15" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="4T5-lY-ej8"/>
                             <constraint firstItem="kPc-X5-Zpe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="5YY-A6-AEf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1Zb-wX-ufM" secondAttribute="trailing" constant="35" id="9u2-NP-535"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5Ym-cW-p15" secondAttribute="bottom" constant="20" id="GU0-yy-IV3"/>
                             <constraint firstItem="IrF-uH-HNM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IpE-rf-Kmm"/>
                             <constraint firstItem="QUP-a9-E2k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="PvV-h9-AXW"/>
@@ -232,6 +243,15 @@
                             <outletCollection property="gestureRecognizers" destination="6HU-nY-UCt" appends="YES" id="Zpq-zx-aes"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="bottomLeftButton" destination="5aJ-8l-VEW" id="JLL-Ck-Pky"/>
+                        <outlet property="bottomRightButton" destination="J6V-Si-rRv" id="kLv-QC-ehL"/>
+                        <outlet property="firstLayoutSelected" destination="iaS-Xt-g9b" id="qId-ER-zLt"/>
+                        <outlet property="secondLayoutSelected" destination="GuM-EM-c9y" id="ydj-Eo-bfJ"/>
+                        <outlet property="thirdLayoutSelected" destination="aza-Am-KRz" id="Geo-ah-i0M"/>
+                        <outlet property="topLeftButton" destination="I72-jr-7TJ" id="GjS-Rw-bzd"/>
+                        <outlet property="topRightButton" destination="R5L-5Y-Xph" id="Q6y-5v-Gzx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="up" id="6HU-nY-UCt"/>
@@ -240,6 +260,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Arrow Left" width="10" height="14"/>
         <image name="Arrow Up" width="14" height="10"/>
         <image name="Layout 1" width="80" height="80"/>
         <image name="Layout 2" width="80" height="80"/>
