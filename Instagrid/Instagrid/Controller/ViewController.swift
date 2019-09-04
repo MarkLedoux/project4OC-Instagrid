@@ -8,13 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var image = UIImage(named: "Selected")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+//        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: Selector(("respondToSwipeGesture:")))
+        swipeUp.direction = UISwipeGestureRecognizer.Direction.up
+        self.view.addGestureRecognizer(swipeUp)
     }
 
     //MARK: bottoms buttons actions
@@ -25,6 +30,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var firstLayoutSelected: UIButton!
     @IBOutlet weak var secondLayoutSelected: UIButton!
     @IBOutlet weak var thirdLayoutSelected: UIButton!
+    @IBOutlet weak var labelForSwipe: UILabel!
 
     @IBAction func firstLayout(_ sender: Any) {
         topRightButton.isHidden = true
@@ -46,7 +52,36 @@ class ViewController: UIViewController {
     }
 
     //MARK: GridView buttons actions
+    @IBAction func openPhotoLibrary(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary;
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
 
+        }
+
+    }
+    
+    @IBAction func shareImage(_ sender: UISwipeGestureRecognizer) {
+        let image = UIImage(named: "")
+        let imageToShare = [image!]
+        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+
+
+    
+
+//    func deviceOrientationForSwipeToShare(deviceOrientation: UIDeviceOrientation) {
+//        if deviceOrientation.isPortrait {
+//            labelForSwipe.text = "Swipe up to share"
+//        } else if deviceOrientation.isLandscape {
+//            labelForSwipe.text = "Swipe left to share"
+//        }
+//    }
     
 
 }
