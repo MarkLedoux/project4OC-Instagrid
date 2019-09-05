@@ -10,19 +10,18 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    var image = UIImage(named: "Selected")
+    var image = UIImage(named: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(ViewController.deviceOrientationForSwipeToShare(deviceOrientation:)), name: UIDevice.orientationDidChangeNotification, object: nil)
 
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: Selector(("respondToSwipeGesture:")))
-        swipeUp.direction = UISwipeGestureRecognizer.Direction.up
-        self.view.addGestureRecognizer(swipeUp)
     }
 
     //MARK: bottoms buttons actions
+    //TODO: reference the buttons for the layout change as an array of outlets and find how to get them to fire individually 
     @IBOutlet weak var topRightButton: UIButton!
     @IBOutlet weak var bottomRightButton: UIButton!
     @IBOutlet weak var topLeftButton: UIButton!
@@ -32,22 +31,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var thirdLayoutSelected: UIButton!
     @IBOutlet weak var labelForSwipe: UILabel!
 
+
     @IBAction func firstLayout(_ sender: Any) {
         topRightButton.isHidden = true
         bottomRightButton.isHidden = false
-        firstLayoutSelected.setImage(image, for: .highlighted)
+        firstLayoutSelected.setImage(UIImage(named: "Selected"), for: .selected)
 
     }
     @IBAction func secondLayout(_ sender: Any) {
         topRightButton.isHidden = false
         bottomRightButton.isHidden = true
-        secondLayoutSelected.setImage(image, for: .highlighted)
+        secondLayoutSelected.setImage(UIImage(named: "Selected"), for: .selected)
 
     }
     @IBAction func thirdLayout(_ sender: Any) {
         topRightButton.isHidden = false
         bottomRightButton.isHidden = false
-        thirdLayoutSelected.setImage(image, for: .highlighted)
+        thirdLayoutSelected.setImage(UIImage(named: "Selected"), for: .selected)
         
     }
 
@@ -75,7 +75,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     
 
-    func deviceOrientationForSwipeToShare(deviceOrientation: UIDeviceOrientation) {
+    @objc func deviceOrientationForSwipeToShare(deviceOrientation: UIDeviceOrientation) {
         if deviceOrientation.isPortrait {
             labelForSwipe.text = "Swipe up to share"
         } else if deviceOrientation.isLandscape {
