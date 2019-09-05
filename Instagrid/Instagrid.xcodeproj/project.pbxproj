@@ -12,7 +12,7 @@
 		B3678C01230C481A000BEED9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3678BFF230C481A000BEED9 /* Main.storyboard */; };
 		B3678C03230C481B000BEED9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3678C02230C481B000BEED9 /* Assets.xcassets */; };
 		B3678C06230C481B000BEED9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3678C04230C481B000BEED9 /* LaunchScreen.storyboard */; };
-		B3770253232122840085A51D /* PictureGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3770252232122840085A51D /* PictureGridView.swift */; };
+		B3A8F8022321C268001C587A /* PictureGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8F8012321C268001C587A /* PictureGridView.swift */; };
 		B3DC4348230C5A8D00DD10CF /* Delm-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3DC4346230C5A8D00DD10CF /* Delm-Medium.otf */; };
 		B3DC4349230C5A8D00DD10CF /* ThirstySoftRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3DC4347230C5A8D00DD10CF /* ThirstySoftRegular.otf */; };
 		B3FE75092316F93C00E54E84 /* PictureGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE75082316F93C00E54E84 /* PictureGrid.swift */; };
@@ -26,7 +26,7 @@
 		B3678C02230C481B000BEED9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3678C05230C481B000BEED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B3678C07230C481B000BEED9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B3770252232122840085A51D /* PictureGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureGridView.swift; sourceTree = "<group>"; };
+		B3A8F8012321C268001C587A /* PictureGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PictureGridView.swift; path = Instagrid/View/PictureGridView.swift; sourceTree = SOURCE_ROOT; };
 		B3DC4346230C5A8D00DD10CF /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delm-Medium.otf"; sourceTree = "<group>"; };
 		B3DC4347230C5A8D00DD10CF /* ThirstySoftRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ThirstySoftRegular.otf; sourceTree = "<group>"; };
 		B3FE75082316F93C00E54E84 /* PictureGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureGrid.swift; sourceTree = "<group>"; };
@@ -86,7 +86,6 @@
 		B381F623230D21180099F96D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B3770252232122840085A51D /* PictureGridView.swift */,
 				B3678BFF230C481A000BEED9 /* Main.storyboard */,
 			);
 			path = View;
@@ -103,6 +102,7 @@
 		B381F625230D21420099F96D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B3A8F8012321C268001C587A /* PictureGridView.swift */,
 				B3FE75082316F93C00E54E84 /* PictureGrid.swift */,
 			);
 			path = Model;
@@ -182,7 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3FE75092316F93C00E54E84 /* PictureGrid.swift in Sources */,
-				B3770253232122840085A51D /* PictureGridView.swift in Sources */,
+				B3A8F8022321C268001C587A /* PictureGridView.swift in Sources */,
 				B3678BFE230C481A000BEED9 /* ViewController.swift in Sources */,
 				B3678BFC230C481A000BEED9 /* AppDelegate.swift in Sources */,
 			);

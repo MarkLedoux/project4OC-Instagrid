@@ -125,10 +125,10 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <outletCollection property="buttonInPictureGridView" destination="I72-jr-7TJ" collectionClass="NSMutableArray" id="Lm0-Dr-IgY"/>
-                                    <outletCollection property="buttonInPictureGridView" destination="R5L-5Y-Xph" collectionClass="NSMutableArray" id="Bpb-Kj-Y58"/>
-                                    <outletCollection property="buttonInPictureGridView" destination="J6V-Si-rRv" collectionClass="NSMutableArray" id="omh-00-eem"/>
-                                    <outletCollection property="buttonInPictureGridView" destination="5aJ-8l-VEW" collectionClass="NSMutableArray" id="Dbh-9R-PDs"/>
+                                    <outletCollection property="buttonInPictureGridView" destination="I72-jr-7TJ" collectionClass="NSMutableArray" id="Ehs-QT-DEc"/>
+                                    <outletCollection property="buttonInPictureGridView" destination="R5L-5Y-Xph" collectionClass="NSMutableArray" id="mIP-k8-UN1"/>
+                                    <outletCollection property="buttonInPictureGridView" destination="5aJ-8l-VEW" collectionClass="NSMutableArray" id="nZf-Ro-xOb"/>
+                                    <outletCollection property="buttonInPictureGridView" destination="J6V-Si-rRv" collectionClass="NSMutableArray" id="UtM-zE-dzZ"/>
                                 </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kPc-X5-Zpe" userLabel="Buttons">
@@ -263,6 +263,10 @@
                         <outletCollection property="collectionOfButtonToChangeLayout" destination="iaS-Xt-g9b" collectionClass="NSMutableArray" id="JvL-Pv-F3b"/>
                         <outletCollection property="collectionOfButtonToChangeLayout" destination="GuM-EM-c9y" collectionClass="NSMutableArray" id="GVl-yQ-bRQ"/>
                         <outletCollection property="collectionOfButtonToChangeLayout" destination="aza-Am-KRz" collectionClass="NSMutableArray" id="Ib1-bf-teZ"/>
+                        <outletCollection property="buttonInPictureGridView" destination="I72-jr-7TJ" collectionClass="NSMutableArray" id="uiM-4s-7YV"/>
+                        <outletCollection property="buttonInPictureGridView" destination="R5L-5Y-Xph" collectionClass="NSMutableArray" id="1O5-UZ-B77"/>
+                        <outletCollection property="buttonInPictureGridView" destination="5aJ-8l-VEW" collectionClass="NSMutableArray" id="uRz-Cz-h0V"/>
+                        <outletCollection property="buttonInPictureGridView" destination="J6V-Si-rRv" collectionClass="NSMutableArray" id="5QM-B6-k0B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

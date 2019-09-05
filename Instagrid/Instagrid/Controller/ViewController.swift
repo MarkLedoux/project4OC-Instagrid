@@ -12,6 +12,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     var image = UIImage(named: "")
     @IBOutlet weak var labelForSwipe: UILabel!
+    @IBOutlet weak var imagePicked: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //TODO: figure out how to place the Selected image according to the button without having to reference the spot and size specific CGRect
 
     @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
+    @IBOutlet var buttonInPictureGridView: [UIButton]!
     @IBOutlet var pictureView: PictureGridView!
 
     @IBAction func firstLayout(_ sender: UIButton) {
@@ -54,9 +56,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             UIButton.animate(withDuration: 0.2, animations: {
                                 sender.transform = CGAffineTransform.identity})
         })
-        pictureView.buttonInPictureGridView[0].isHidden = true
+        buttonInPictureGridView[0].isHidden = true
         pictureView.buttonInPictureGridView[3].isHidden = false
-        
+
     }
     @IBAction func secondLayout(_ sender: UIButton) {
         let button = UIButton(frame: CGRect(x: 167, y: 757, width: 80, height: 80))
@@ -96,6 +98,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     //MARK: GridView buttons actions
+    
+    @IBAction func shareImage(_ sender: UISwipeGestureRecognizer) {
+        let image = imagePicked
+        let imageToShare = [image!]
+        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+
+    //MARK: methods to open the camera or the photo library
     @IBAction func openPhotoLibrary(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let imagePicker = UIImagePickerController()
@@ -104,20 +116,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             imagePicker.allowsEditing = true
             self.present(imagePicker, animated: true, completion: nil)
         }
-
-
-
-    }
-    
-    @IBAction func shareImage(_ sender: UISwipeGestureRecognizer) {
-        let image = UIImage(named: "")
-        let imageToShare = [image!]
-        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
-
-        self.present(activityViewController, animated: true, completion: nil)
     }
 
-    //the text changes properly when the device starts up in landcape but when rotating afterwards no change occurs
+    @IBAction func openCameraButton(_sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .camera;
+            imagePicker.allowsEditing = false
+            self.present(imagePicker,animated: true, completion: nil)
+        }
+
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            imagePicked.contentMode = .scaleAspectFill
+            imagePicked.image = image
+
+        }
+        dismiss(animated: true, completion: nil)
+    }
+
+    //MARK: methods to checks for device and for interface orientation when the app launches and when the app is running
     func checkInterfaceOrientation(interfaceOrientation: UIInterfaceOrientation) {
 
         switch interfaceOrientation {
@@ -132,7 +153,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         default:
             break
         }
-
     }
 
     @objc func deviceOrientationChanged() {
@@ -153,9 +173,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         default:
             break
         }
-
     }
-    
 }
 
 

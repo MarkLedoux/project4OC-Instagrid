@@ -9,9 +9,5 @@
 import UIKit
 
 class PictureGridView: UIView {
-
     @IBOutlet var buttonInPictureGridView: [UIButton]!
-
-    
-
 }
