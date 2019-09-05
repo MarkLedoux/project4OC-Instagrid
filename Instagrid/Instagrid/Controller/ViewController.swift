@@ -21,34 +21,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     //MARK: bottoms buttons actions
-    //TODO: reference the buttons for the layout change as an array of outlets and find how to get them to fire individually 
-    @IBOutlet weak var topRightButton: UIButton!
-    @IBOutlet weak var bottomRightButton: UIButton!
-    @IBOutlet weak var topLeftButton: UIButton!
-    @IBOutlet weak var bottomLeftButton: UIButton!
-    @IBOutlet weak var firstLayoutSelected: UIButton!
-    @IBOutlet weak var secondLayoutSelected: UIButton!
-    @IBOutlet weak var thirdLayoutSelected: UIButton!
+    //TODO: reference the buttons for the layout change as an array of outlets and find how to get them to fire individually
     @IBOutlet weak var labelForSwipe: UILabel!
 
+    @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
+    @IBOutlet var pictureView: PictureGridView!
 
     @IBAction func firstLayout(_ sender: Any) {
-        topRightButton.isHidden = true
-        bottomRightButton.isHidden = false
-        firstLayoutSelected.setImage(UIImage(named: "Selected"), for: .selected)
-
+        pictureView.buttonInPictureGridView[0].isHidden = true
+        pictureView.buttonInPictureGridView[3].isHidden = false
     }
     @IBAction func secondLayout(_ sender: Any) {
-        topRightButton.isHidden = false
-        bottomRightButton.isHidden = true
-        secondLayoutSelected.setImage(UIImage(named: "Selected"), for: .selected)
-
+        pictureView.buttonInPictureGridView[0].isHidden = false
+        pictureView.buttonInPictureGridView[3].isHidden = true
     }
     @IBAction func thirdLayout(_ sender: Any) {
-        topRightButton.isHidden = false
-        bottomRightButton.isHidden = false
-        thirdLayoutSelected.setImage(UIImage(named: "Selected"), for: .selected)
-        
+        pictureView.buttonInPictureGridView[0].isHidden = false
+        pictureView.buttonInPictureGridView[3].isHidden = false
     }
 
     //MARK: GridView buttons actions
@@ -72,9 +61,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.present(activityViewController, animated: true, completion: nil)
     }
 
-
-    
-
     @objc func deviceOrientationForSwipeToShare(deviceOrientation: UIDeviceOrientation) {
         if deviceOrientation.isPortrait {
             labelForSwipe.text = "Swipe up to share"
@@ -82,7 +68,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             labelForSwipe.text = "Swipe left to share"
         }
     }
-
 
 }
 

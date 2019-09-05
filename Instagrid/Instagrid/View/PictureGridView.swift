@@ -10,10 +10,8 @@ import UIKit
 
 class PictureGridView: UIView {
 
-    //find a way to refence all the buttons in an array and get them to act individually 
-    @IBOutlet weak var topRightButton: UIButton!
-    @IBOutlet weak var bottomRightButton: UIButton!
-    @IBOutlet weak var topLeftButton: UIButton!
-    @IBOutlet weak var bottomLeftButton: UIButton!
+    @IBOutlet var buttonInPictureGridView: [UIButton]!
+
+    
 
 }
