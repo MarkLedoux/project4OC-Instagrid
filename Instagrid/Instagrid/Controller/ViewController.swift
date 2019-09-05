@@ -17,7 +17,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        checkDeviceOrientation(interfaceOrientation: UIApplication.shared.statusBarOrientation)
+        let device = UIDevice.current
+        device.beginGeneratingDeviceOrientationNotifications()
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(deviceOrientationChanged), name: Notification.Name("UIDeviceOrientationDidChangeNotification"), object: nil)
+
+        checkInterfaceOrientation(interfaceOrientation: UIApplication.shared.statusBarOrientation)
+
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(shareImage(_:)))
+
+        swipeUp.direction = .up
+        view.addGestureRecognizer(swipeUp)
 
     }
 
@@ -92,8 +102,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             imagePicker.sourceType = .photoLibrary;
             imagePicker.allowsEditing = true
             self.present(imagePicker, animated: true, completion: nil)
-
         }
+
+
 
     }
     
@@ -106,7 +117,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     //the text changes properly when the device starts up in landcape but when rotating afterwards no change occurs
-    func checkDeviceOrientation(interfaceOrientation: UIInterfaceOrientation) {
+    func checkInterfaceOrientation(interfaceOrientation: UIInterfaceOrientation) {
 
         switch interfaceOrientation {
         case .portrait, .portraitUpsideDown:
@@ -122,6 +133,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
 
     }
+
+    @objc func deviceOrientationChanged() {
+        inspectDeviceOrientation()
+    }
+
+    func inspectDeviceOrientation() {
+        let orientation = UIDevice.current.orientation
+        switch UIDevice.current.orientation {
+        case .portrait, .portraitUpsideDown:
+            if orientation.isPortrait {
+                labelForSwipe.text = "Swipe up to share"
+            }
+        case .landscapeRight, .landscapeLeft:
+            if orientation.isLandscape {
+                labelForSwipe.text = "Swipe left to share"
+            }
+        default:
+            break
+        }
+
+    }
+    
 }
 
 
