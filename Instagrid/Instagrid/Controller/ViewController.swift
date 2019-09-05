@@ -56,6 +56,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         })
         pictureView.buttonInPictureGridView[0].isHidden = true
         pictureView.buttonInPictureGridView[3].isHidden = false
+        
     }
     @IBAction func secondLayout(_ sender: UIButton) {
         let button = UIButton(frame: CGRect(x: 167, y: 757, width: 80, height: 80))
