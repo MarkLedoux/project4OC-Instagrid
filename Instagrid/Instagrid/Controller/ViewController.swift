@@ -15,7 +15,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
 
         let swipeUp = UISwipeGestureRecognizer(target: self, action: Selector(("respondToSwipeGesture:")))
         swipeUp.direction = UISwipeGestureRecognizer.Direction.up
@@ -75,14 +75,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     
 
-//    func deviceOrientationForSwipeToShare(deviceOrientation: UIDeviceOrientation) {
-//        if deviceOrientation.isPortrait {
-//            labelForSwipe.text = "Swipe up to share"
-//        } else if deviceOrientation.isLandscape {
-//            labelForSwipe.text = "Swipe left to share"
-//        }
-//    }
-    
+    func deviceOrientationForSwipeToShare(deviceOrientation: UIDeviceOrientation) {
+        if deviceOrientation.isPortrait {
+            labelForSwipe.text = "Swipe up to share"
+        } else if deviceOrientation.isLandscape {
+            labelForSwipe.text = "Swipe left to share"
+        }
+    }
+
 
 }
 
