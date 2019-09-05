@@ -11,17 +11,18 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var image = UIImage(named: "")
+    @IBOutlet weak var labelForSwipe: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.deviceOrientationForSwipeToShare(deviceOrientation:)), name: UIDevice.orientationDidChangeNotification, object: nil)
+
+        checkDeviceOrientation(interfaceOrientation: UIApplication.shared.statusBarOrientation)
 
     }
 
     //MARK: bottoms buttons actions
     //TODO: figure out how to place the Selected image according to the button without having to reference the spot and size specific CGRect
-    @IBOutlet weak var labelForSwipe: UILabel!
 
     @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
     @IBOutlet var pictureView: PictureGridView!
@@ -104,12 +105,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.present(activityViewController, animated: true, completion: nil)
     }
 
-    @objc func deviceOrientationForSwipeToShare(deviceOrientation: UIDeviceOrientation) {
-        if deviceOrientation.isPortrait {
-            labelForSwipe.text = "Swipe up to share"
-        } else if deviceOrientation.isLandscape {
-            labelForSwipe.text = "Swipe left to share"
+    //the text changes properly when the device starts up in landcape but when rotating afterwards no change occurs
+    func checkDeviceOrientation(interfaceOrientation: UIInterfaceOrientation) {
+
+        switch interfaceOrientation {
+        case .portrait, .portraitUpsideDown:
+            if interfaceOrientation.isPortrait {
+                labelForSwipe.text = "Swipe up to share"
+            }
+        case .landscapeLeft, .landscapeRight:
+            if interfaceOrientation.isLandscape {
+                labelForSwipe.text = "Swipe left to share"
+            }
+        default:
+            break
         }
+
     }
 }
 
