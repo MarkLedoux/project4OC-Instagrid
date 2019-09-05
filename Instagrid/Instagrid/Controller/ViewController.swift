@@ -15,27 +15,70 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(ViewController.deviceOrientationForSwipeToShare(deviceOrientation:)), name: UIDevice.orientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.deviceOrientationForSwipeToShare(deviceOrientation:)), name: UIDevice.orientationDidChangeNotification, object: nil)
 
     }
 
     //MARK: bottoms buttons actions
-    //TODO: reference the buttons for the layout change as an array of outlets and find how to get them to fire individually
+    //TODO: figure out how to place the Selected image according to the button without having to reference the spot and size specific CGRect
     @IBOutlet weak var labelForSwipe: UILabel!
 
     @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
     @IBOutlet var pictureView: PictureGridView!
 
-    @IBAction func firstLayout(_ sender: Any) {
+    @IBAction func firstLayout(_ sender: UIButton) {
+        //only works on XS Max
+        let button = UIButton(frame: CGRect(x: 42.3, y: 757, width: 80, height: 80))
+        button.addTarget(self, action: #selector(touchesEnded(_:with:)), for: .touchUpInside)
+        button.isExclusiveTouch = true
+        button.setBackgroundImage(UIImage(named: "Selected"), for: .normal)
+        button.setImage(UIImage(named: "Selected"), for: .selected)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 0)
+        view.addSubview(button)
+        dismiss(animated: true, completion: nil)
+
+        UIButton.animate(withDuration: 0.2,animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
+                         completion: { finish in
+                            UIButton.animate(withDuration: 0.2, animations: {
+                                sender.transform = CGAffineTransform.identity})
+        })
         pictureView.buttonInPictureGridView[0].isHidden = true
         pictureView.buttonInPictureGridView[3].isHidden = false
     }
-    @IBAction func secondLayout(_ sender: Any) {
+    @IBAction func secondLayout(_ sender: UIButton) {
+        let button = UIButton(frame: CGRect(x: 167, y: 757, width: 80, height: 80))
+        button.addTarget(self, action: #selector(touchesEnded(_:with:)), for: .touchUpInside)
+        button.isExclusiveTouch = true
+        button.setBackgroundImage(UIImage(named: "Selected"), for: .normal)
+        button.setImage(UIImage(named: "Selected"), for: .selected)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 0)
+        view.addSubview(button)
+
+        UIButton.animate(withDuration: 0.2,animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
+                         completion: { finish in
+                            UIButton.animate(withDuration: 0.2, animations: {
+                                sender.transform = CGAffineTransform.identity})
+        })
         pictureView.buttonInPictureGridView[0].isHidden = false
         pictureView.buttonInPictureGridView[3].isHidden = true
     }
-    @IBAction func thirdLayout(_ sender: Any) {
+    @IBAction func thirdLayout(_ sender: UIButton) {
+        let button = UIButton(frame: CGRect(x: 291.67, y: 757, width: 80, height: 80))
+        button.addTarget(self, action: #selector(touchesEnded(_:with:)), for: .touchUpInside)
+        button.isExclusiveTouch = true
+        button.setBackgroundImage(UIImage(named: "Selected"), for: .normal)
+        button.setImage(UIImage(named: "Selected"), for: .selected)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 0)
+        view.addSubview(button)
+
+        UIButton.animate(withDuration: 0.2,animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
+                         completion: { finish in
+                            UIButton.animate(withDuration: 0.2, animations: {
+                                sender.transform = CGAffineTransform.identity})
+        })
         pictureView.buttonInPictureGridView[0].isHidden = false
         pictureView.buttonInPictureGridView[3].isHidden = false
     }
@@ -68,7 +111,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             labelForSwipe.text = "Swipe left to share"
         }
     }
-
 }
 
 
