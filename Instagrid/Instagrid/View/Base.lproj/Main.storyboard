@@ -61,7 +61,7 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
                                                         <connections>
-                                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="r5e-e5-wzk"/>
+                                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WeG-jr-g9p"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5L-5Y-Xph">
@@ -69,7 +69,7 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
                                                         <connections>
-                                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OnN-q0-QiL"/>
+                                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gGr-q0-3bK"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -83,7 +83,7 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
                                                         <connections>
-                                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aMu-7A-rqu"/>
+                                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3N9-le-cwQ"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6V-Si-rRv">
@@ -91,7 +91,7 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
                                                         <connections>
-                                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k9m-Dg-bax"/>
+                                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z1C-Y2-vbE"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -133,31 +133,25 @@
                                         <exclude reference="udb-qi-qjz"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <outletCollection property="buttonInPictureGridView" destination="I72-jr-7TJ" collectionClass="NSMutableArray" id="Ehs-QT-DEc"/>
-                                    <outletCollection property="buttonInPictureGridView" destination="R5L-5Y-Xph" collectionClass="NSMutableArray" id="mIP-k8-UN1"/>
-                                    <outletCollection property="buttonInPictureGridView" destination="5aJ-8l-VEW" collectionClass="NSMutableArray" id="nZf-Ro-xOb"/>
-                                    <outletCollection property="buttonInPictureGridView" destination="J6V-Si-rRv" collectionClass="NSMutableArray" id="UtM-zE-dzZ"/>
-                                </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kPc-X5-Zpe" userLabel="Buttons">
                                 <rect key="frame" x="25" y="463" width="270" height="80"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iaS-Xt-g9b">
+                                    <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iaS-Xt-g9b">
                                         <rect key="frame" x="0.0" y="0.0" width="83.5" height="80"/>
                                         <state key="normal" image="Layout 1"/>
                                         <connections>
                                             <action selector="buttonLayoutDidGetTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ml2-e1-Onh"/>
                                         </connections>
                                     </button>
-                                    <button contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuM-EM-c9y">
+                                    <button tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuM-EM-c9y">
                                         <rect key="frame" x="93.5" y="0.0" width="83" height="80"/>
                                         <state key="normal" image="Layout 2"/>
                                         <connections>
                                             <action selector="buttonLayoutDidGetTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TXm-aH-gaE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aza-Am-KRz">
+                                    <button opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aza-Am-KRz">
                                         <rect key="frame" x="186.5" y="0.0" width="83.5" height="80"/>
                                         <state key="normal" image="Layout 3"/>
                                         <connections>
@@ -268,9 +262,9 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="R5L-5Y-Xph" id="HIW-xJ-PZB"/>
-                        <outlet property="imageView2" destination="I72-jr-7TJ" id="Gjx-ep-gJo"/>
-                        <outlet property="imageView3" destination="J6V-Si-rRv" id="25M-5e-O9g"/>
-                        <outlet property="imageView4" destination="5aJ-8l-VEW" id="OK8-Np-1dK"/>
+                        <outlet property="imageView2" destination="I72-jr-7TJ" id="TY2-8O-877"/>
+                        <outlet property="imageView3" destination="J6V-Si-rRv" id="1Nb-Zd-EAX"/>
+                        <outlet property="imageView4" destination="5aJ-8l-VEW" id="tKc-pe-qqg"/>
                         <outlet property="labelForSwipe" destination="IlF-6W-Aeg" id="2La-j1-Fai"/>
                         <outlet property="pictureView" destination="5Ym-cW-p15" id="aPD-IU-V7e"/>
                         <outletCollection property="collectionOfButtonToChangeLayout" destination="iaS-Xt-g9b" collectionClass="NSMutableArray" id="JvL-Pv-F3b"/>
