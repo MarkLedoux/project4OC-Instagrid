@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    var image = UIImage(named: "")
+    var newPic: Bool?
+    @IBOutlet var imageView: UIButton!
+    @IBOutlet var imageView2: UIButton!
+    @IBOutlet var imageView3: UIButton!
+    @IBOutlet var imageView4: UIButton!
+
     @IBOutlet weak var labelForSwipe: UILabel!
     @IBOutlet weak var imagePicked: UIImageView!
 
@@ -108,34 +114,55 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     //MARK: methods to open the camera or the photo library
-    @IBAction func openPhotoLibrary(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = .photoLibrary;
-            imagePicker.allowsEditing = true
-            self.present(imagePicker, animated: true, completion: nil)
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        let myAlert = UIAlertController(title: "Select Image from", message: "", preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerController.SourceType.camera
+                imagePicker.mediaTypes = [kUTTypeImage as String]
+                imagePicker.allowsEditing = true
+                self.present(imagePicker, animated: true, completion: nil)
+                self.newPic = true
+            }
         }
-    }
-
-    @IBAction func openCameraButton(_sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = .camera;
-            imagePicker.allowsEditing = false
-            self.present(imagePicker,animated: true, completion: nil)
+        let cameraRollAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+                imagePicker.mediaTypes = [kUTTypeImage as String]
+                imagePicker.allowsEditing = true
+                self.present(imagePicker, animated: true, completion: nil)
+                self.newPic = false
+            }
         }
-
+        myAlert.addAction(cameraAction)
+        myAlert.addAction(cameraRollAction)
+        self.present(myAlert, animated: true)
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            imagePicked.contentMode = .scaleAspectFill
-            imagePicked.image = image
+        let mediaType = info[UIImagePickerController.InfoKey.mediaType] as! NSString
+        if mediaType.isEqual(to: kUTTypeImage as String) {
+            let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+            imageView.setBackgroundImage(UIImage(named: "Plus"), for: .normal)
+            imageView.setImage(image, for: .normal)
 
+            if newPic == true {
+                UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageError), nil)
+            }
         }
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc func imageError(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo: UnsafeRawPointer) {
+        if error != nil {
+            let alert = UIAlertController(title: "Save failed", message: "Failed to save image", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+        }
+
     }
 
     //MARK: methods to checks for device and for interface orientation when the app launches and when the app is running

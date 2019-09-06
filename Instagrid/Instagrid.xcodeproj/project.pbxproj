@@ -86,6 +86,7 @@
 		B381F623230D21180099F96D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B3A8F8012321C268001C587A /* PictureGridView.swift */,
 				B3678BFF230C481A000BEED9 /* Main.storyboard */,
 			);
 			path = View;
@@ -102,7 +103,6 @@
 		B381F625230D21420099F96D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B3A8F8012321C268001C587A /* PictureGridView.swift */,
 				B3FE75082316F93C00E54E84 /* PictureGrid.swift */,
 			);
 			path = Model;

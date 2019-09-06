@@ -60,13 +60,16 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="167" height="167"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
+                                                        <connections>
+                                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="r5e-e5-wzk"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5L-5Y-Xph">
                                                         <rect key="frame" x="177" y="0.0" width="167" height="167"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
                                                         <connections>
-                                                            <action selector="openPhotoLibrary:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Egi-Tc-Acd"/>
+                                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OnN-q0-QiL"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -79,11 +82,17 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="167" height="167"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
+                                                        <connections>
+                                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aMu-7A-rqu"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6V-Si-rRv">
                                                         <rect key="frame" x="177" y="0.0" width="167" height="167"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
+                                                        <connections>
+                                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k9m-Dg-bax"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.062745098040000002" green="0.40000000000000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -258,6 +267,10 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="R5L-5Y-Xph" id="HIW-xJ-PZB"/>
+                        <outlet property="imageView2" destination="I72-jr-7TJ" id="Gjx-ep-gJo"/>
+                        <outlet property="imageView3" destination="J6V-Si-rRv" id="25M-5e-O9g"/>
+                        <outlet property="imageView4" destination="5aJ-8l-VEW" id="OK8-Np-1dK"/>
                         <outlet property="labelForSwipe" destination="IlF-6W-Aeg" id="2La-j1-Fai"/>
                         <outlet property="pictureView" destination="5Ym-cW-p15" id="aPD-IU-V7e"/>
                         <outletCollection property="collectionOfButtonToChangeLayout" destination="iaS-Xt-g9b" collectionClass="NSMutableArray" id="JvL-Pv-F3b"/>
