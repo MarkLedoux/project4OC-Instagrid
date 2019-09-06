@@ -11,12 +11,12 @@ import MobileCoreServices
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    //MARK: PROPERTIES
     var newPic: Bool?
     @IBOutlet var imageView: UIButton!
     @IBOutlet var imageView2: UIButton!
     @IBOutlet var imageView3: UIButton!
     @IBOutlet var imageView4: UIButton!
+
     @IBOutlet weak var labelForSwipe: UILabel!
     @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
@@ -41,12 +41,50 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     //MARK: bottoms buttons actions
     //TODO: figure out how to place the Selected image according to the button without having to reference the spot and size specific CGRect
+
+    //    @IBAction func buttonLayoutDidGetTapped(_ sender: UIButton) {
+    //        UIButton.animate(withDuration: 0.2,animations: {
+    //            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
+    //                         completion: { finish in
+    //                            UIButton.animate(withDuration: 0.2, animations: {
+    //                                sender.transform = CGAffineTransform.identity})
+    //        })
+    //    let firstPictureViewButton = buttonInPictureGridView[0]
+    //    let thirdPictureViewButton = buttonInPictureGridView[3]
+    //
+    //        switch sender.tag {
+    //        case 0:
+    //            // for the left button, concerning layout 1
+    //            hidingButtonInPictureView(topRightButtonIsHidden: true, bottomRightButtonIsHidden: false)
+    //            sender.isSelected = true
+    //
+    //            disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 1, isSelected: false)
+    //        case 1:
+    //            // for the middle button, concerning layout 2
+    //            hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: true)
+    //            sender.isSelected = true
+    //
+    //            disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 2, isSelected: false)
+    //        case 2:
+    //            // for the right button, concerning layout 3
+    //            hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: false)
+    //            sender.isSelected = true
+    //
+    //            disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 3, isSelected: false)
+    //        default:
+    //            break
+    //
+    //        }
+    //
+    //    }
+
+
     @IBAction func firstLayout(_ sender: UIButton) {
         //only works on XS Max
         let button = UIButton(frame: CGRect(x: 42.3, y: 757, width: 80, height: 80))
         button.addTarget(self, action: #selector(touchesEnded(_:with:)), for: .touchUpInside)
         button.isExclusiveTouch = true
-        button.setBackgroundImage(button.currentImage, for: .normal)
+        button.setBackgroundImage(UIImage(named: "Selected"), for: .normal)
         button.setImage(UIImage(named: "Selected"), for: .selected)
         button.imageEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 0)
         view.addSubview(button)

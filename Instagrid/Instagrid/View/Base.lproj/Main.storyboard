@@ -147,21 +147,21 @@
                                         <rect key="frame" x="0.0" y="0.0" width="114.66666666666667" height="80"/>
                                         <state key="normal" image="Layout 1"/>
                                         <connections>
-                                            <action selector="firstLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6cT-sw-OHA"/>
+                                            <action selector="firstLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uqo-2g-7hv"/>
                                         </connections>
                                     </button>
                                     <button contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuM-EM-c9y">
                                         <rect key="frame" x="124.66666666666666" y="0.0" width="114.66666666666666" height="80"/>
                                         <state key="normal" image="Layout 2"/>
                                         <connections>
-                                            <action selector="secondLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lbW-qF-u1w"/>
+                                            <action selector="secondLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L3K-73-fsn"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aza-Am-KRz">
                                         <rect key="frame" x="249.33333333333329" y="0.0" width="114.66666666666666" height="80"/>
                                         <state key="normal" image="Layout 3"/>
                                         <connections>
-                                            <action selector="thirdLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cz3-Dc-5QQ"/>
+                                            <action selector="thirdLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hil-4b-bg8"/>
                                         </connections>
                                     </button>
                                 </subviews>
