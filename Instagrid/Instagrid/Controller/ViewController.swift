@@ -11,14 +11,17 @@ import MobileCoreServices
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    //MARK: PROPERTIES
     var newPic: Bool?
     @IBOutlet var imageView: UIButton!
     @IBOutlet var imageView2: UIButton!
     @IBOutlet var imageView3: UIButton!
     @IBOutlet var imageView4: UIButton!
-
     @IBOutlet weak var labelForSwipe: UILabel!
     @IBOutlet weak var imagePicked: UIImageView!
+    @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
+    @IBOutlet var buttonInPictureGridView: [UIButton]!
+    @IBOutlet var pictureView: PictureGridView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,25 +35,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         checkInterfaceOrientation(interfaceOrientation: UIApplication.shared.statusBarOrientation)
 
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(shareImage(_:)))
-
         swipeUp.direction = .up
         view.addGestureRecognizer(swipeUp)
-
     }
 
     //MARK: bottoms buttons actions
     //TODO: figure out how to place the Selected image according to the button without having to reference the spot and size specific CGRect
-
-    @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
-    @IBOutlet var buttonInPictureGridView: [UIButton]!
-    @IBOutlet var pictureView: PictureGridView!
-
     @IBAction func firstLayout(_ sender: UIButton) {
         //only works on XS Max
         let button = UIButton(frame: CGRect(x: 42.3, y: 757, width: 80, height: 80))
         button.addTarget(self, action: #selector(touchesEnded(_:with:)), for: .touchUpInside)
         button.isExclusiveTouch = true
-        button.setBackgroundImage(UIImage(named: "Selected"), for: .normal)
+        button.setBackgroundImage(button.currentImage, for: .normal)
         button.setImage(UIImage(named: "Selected"), for: .selected)
         button.imageEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 0)
         view.addSubview(button)
