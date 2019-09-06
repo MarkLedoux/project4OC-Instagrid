@@ -42,100 +42,55 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //MARK: bottoms buttons actions
     //TODO: figure out how to place the Selected image according to the button without having to reference the spot and size specific CGRect
 
-    //    @IBAction func buttonLayoutDidGetTapped(_ sender: UIButton) {
-    //        UIButton.animate(withDuration: 0.2,animations: {
-    //            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
-    //                         completion: { finish in
-    //                            UIButton.animate(withDuration: 0.2, animations: {
-    //                                sender.transform = CGAffineTransform.identity})
-    //        })
-    //    let firstPictureViewButton = buttonInPictureGridView[0]
-    //    let thirdPictureViewButton = buttonInPictureGridView[3]
-    //
-    //        switch sender.tag {
-    //        case 0:
-    //            // for the left button, concerning layout 1
-    //            hidingButtonInPictureView(topRightButtonIsHidden: true, bottomRightButtonIsHidden: false)
-    //            sender.isSelected = true
-    //
-    //            disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 1, isSelected: false)
-    //        case 1:
-    //            // for the middle button, concerning layout 2
-    //            hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: true)
-    //            sender.isSelected = true
-    //
-    //            disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 2, isSelected: false)
-    //        case 2:
-    //            // for the right button, concerning layout 3
-    //            hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: false)
-    //            sender.isSelected = true
-    //
-    //            disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 3, isSelected: false)
-    //        default:
-    //            break
-    //
-    //        }
-    //
-    //    }
+        @IBAction func buttonLayoutDidGetTapped(_ sender: UIButton) {
+            UIButton.animate(withDuration: 0.2,animations: {
+                sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
+                             completion: { finish in
+                                UIButton.animate(withDuration: 0.2, animations: {
+                                    sender.transform = CGAffineTransform.identity})
+            })
+//        let firstPictureViewButton = buttonInPictureGridView[0]
+//        let thirdPictureViewButton = buttonInPictureGridView[3]
+            let sender = sender
+            sender.addTarget(self, action: #selector(touchesEnded(_:with:)), for: .touchUpInside)
+            sender.isExclusiveTouch = true
+            sender.setImage(UIImage(named: "Selected"), for: .selected)
+            sender.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            view.addSubview(sender)
+            dismiss(animated: true, completion: nil)
 
+            switch sender.tag {
+            case 0:
+                // for the left button, concerning layout 1
+                hidingButtonInPictureView(topRightButtonIsHidden: true, bottomRightButtonIsHidden: false)
+                sender.isSelected = true
+                if sender.tag == 1 || sender.tag == 2 {
+                    sender.isSelected = false
+                }
 
-    @IBAction func firstLayout(_ sender: UIButton) {
-        //only works on XS Max
-        let button = UIButton(frame: CGRect(x: 42.3, y: 757, width: 80, height: 80))
-        button.addTarget(self, action: #selector(touchesEnded(_:with:)), for: .touchUpInside)
-        button.isExclusiveTouch = true
-        button.setBackgroundImage(UIImage(named: "Selected"), for: .normal)
-        button.setImage(UIImage(named: "Selected"), for: .selected)
-        button.imageEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 0)
-        view.addSubview(button)
-        dismiss(animated: true, completion: nil)
+                disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 0, isSelected: false)
+            case 1:
+                // for the middle button, concerning layout 2
+                hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: true)
+                sender.isSelected = true
+                if sender.tag == 0 || sender.tag == 2 {
+                    sender.isSelected = false
+                }
 
-        UIButton.animate(withDuration: 0.2,animations: {
-            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
-                         completion: { finish in
-                            UIButton.animate(withDuration: 0.2, animations: {
-                                sender.transform = CGAffineTransform.identity})
-        })
-        buttonInPictureGridView[0].isHidden = true
-        pictureView.buttonInPictureGridView[3].isHidden = false
+                disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 1, isSelected: false)
+            case 2:
+                // for the right button, concerning layout 3
+                hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: false)
+                sender.isSelected = true
+                if sender.tag == 0 || sender.tag == 1 {
+                    sender.isSelected = false
+                }
 
-    }
-    @IBAction func secondLayout(_ sender: UIButton) {
-        let button = UIButton(frame: CGRect(x: 167, y: 757, width: 80, height: 80))
-        button.addTarget(self, action: #selector(touchesEnded(_:with:)), for: .touchUpInside)
-        button.isExclusiveTouch = true
-        button.setBackgroundImage(UIImage(named: "Selected"), for: .normal)
-        button.setImage(UIImage(named: "Selected"), for: .selected)
-        button.imageEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 0)
-        view.addSubview(button)
-
-        UIButton.animate(withDuration: 0.2,animations: {
-            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
-                         completion: { finish in
-                            UIButton.animate(withDuration: 0.2, animations: {
-                                sender.transform = CGAffineTransform.identity})
-        })
-        pictureView.buttonInPictureGridView[0].isHidden = false
-        pictureView.buttonInPictureGridView[3].isHidden = true
-    }
-    @IBAction func thirdLayout(_ sender: UIButton) {
-        let button = UIButton(frame: CGRect(x: 291.67, y: 757, width: 80, height: 80))
-        button.addTarget(self, action: #selector(touchesEnded(_:with:)), for: .touchUpInside)
-        button.isExclusiveTouch = true
-        button.setBackgroundImage(UIImage(named: "Selected"), for: .normal)
-        button.setImage(UIImage(named: "Selected"), for: .selected)
-        button.imageEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 0)
-        view.addSubview(button)
-
-        UIButton.animate(withDuration: 0.2,animations: {
-            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
-                         completion: { finish in
-                            UIButton.animate(withDuration: 0.2, animations: {
-                                sender.transform = CGAffineTransform.identity})
-        })
-        pictureView.buttonInPictureGridView[0].isHidden = false
-        pictureView.buttonInPictureGridView[3].isHidden = false
-    }
+                disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 2, isSelected: false)
+            default:
+                break
+            }
+        }
 
     //MARK: GridView buttons actions
     
@@ -172,8 +127,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 self.newPic = false
             }
         }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
         myAlert.addAction(cameraAction)
         myAlert.addAction(cameraRollAction)
+        myAlert.addAction(cancelAction)
         self.present(myAlert, animated: true)
     }
 
@@ -196,7 +155,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let alert = UIAlertController(title: "Save failed", message: "Failed to save image", preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
         }
-
     }
 
     //MARK: methods to checks for device and for interface orientation when the app launches and when the app is running
@@ -233,6 +191,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         default:
             break
+        }
+    }
+
+    func hidingButtonInPictureView(topRightButtonIsHidden: Bool, bottomRightButtonIsHidden: Bool) {
+        pictureView.buttonInPictureGridView[1].isHidden = topRightButtonIsHidden
+        pictureView.buttonInPictureGridView[3].isHidden = bottomRightButtonIsHidden
+    }
+
+    func disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: [UIButton], value: Int, isSelected: Bool) {
+        for button in collectionOfButtonToChangeLayout {
+            if button.tag != value {
+                button.isSelected = isSelected
+            }
         }
     }
 }
