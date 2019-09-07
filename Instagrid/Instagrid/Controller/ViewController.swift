@@ -49,11 +49,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                                 UIButton.animate(withDuration: 0.2, animations: {
                                     sender.transform = CGAffineTransform.identity})
             })
-//        let firstPictureViewButton = buttonInPictureGridView[0]
-//        let thirdPictureViewButton = buttonInPictureGridView[3]
             let sender = sender
-            sender.addTarget(self, action: #selector(touchesEnded(_:with:)), for: .touchUpInside)
+            sender.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+            //necessary to specify the sender is a specific UiButton with a specific CGRect frame?
             sender.isExclusiveTouch = true
+            sender.setBackgroundImage(sender.currentImage, for: .normal)
             sender.setImage(UIImage(named: "Selected"), for: .selected)
             sender.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             view.addSubview(sender)
@@ -64,28 +64,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 // for the left button, concerning layout 1
                 hidingButtonInPictureView(topRightButtonIsHidden: true, bottomRightButtonIsHidden: false)
                 sender.isSelected = true
-                if sender.tag == 2 || sender.tag == 3 {
-                    sender.isSelected = false
-                }
 
                 disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 1, isSelected: false)
             case 2:
                 // for the middle button, concerning layout 2
                 hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: true)
                 sender.isSelected = true
-                if sender.tag == 1 || sender.tag == 3 {
-                    sender.isSelected = false
-                }
 
                 disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 2, isSelected: false)
             case 3:
                 // for the right button, concerning layout 3
                 hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: false)
                 sender.isSelected = true
-                if sender.tag == 1 || sender.tag == 2 {
-                    sender.isSelected = false
-                }
-
+                
                 disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 3, isSelected: false)
             default:
                 break
