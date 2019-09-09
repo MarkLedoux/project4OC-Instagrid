@@ -11,7 +11,6 @@ import MobileCoreServices
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    var newPic: Bool?
 
     @IBOutlet weak var labelForSwipe: UILabel!
     @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
@@ -38,6 +37,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         leftRecognizer.direction = .left
         self.view.addGestureRecognizer(leftRecognizer)
 
+
     }
 
     //MARK: - actions to share the images taken from the grid view using a swipe up when the device is in portrait and a left swipe when the device is in landscape
@@ -48,18 +48,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         switch orientation {
         case .portrait, .portraitUpsideDown:
             if orientation.isPortrait {
-                labelForSwipe.text = "Swipe up to share"
                 sender.direction = .up
                 let myAlert = UIAlertController(title: "Swipe up detected", message: "Great you've made an upward swipe!", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK!", style: .cancel) { (action) in
                     self.dismiss(animated: true, completion: nil)
                 }
-                    myAlert.addAction(okAction)
-                    self.present(myAlert, animated: true)
+                myAlert.addAction(okAction)
+                self.present(myAlert, animated: true)
             }
         case .landscapeLeft, .landscapeRight:
             if orientation.isLandscape {
-                labelForSwipe.text = "Swipe left to share"
                 sender.direction = .left
                 let myAlertForLandscape = UIAlertController(title: "Swipe left detected", message: "Great you've made a leftward swipe!", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK!", style: .cancel) { (action) in
@@ -145,6 +143,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             self.dismiss(animated: true, completion: nil)
         }
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
         myAlert.addAction(cameraAction)
         myAlert.addAction(photoLibraryAction)
         myAlert.addAction(cancelAction)
@@ -152,10 +151,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let mediaType = info[UIImagePickerController.InfoKey.mediaType] as! NSString
+        if let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? NSString {
         if mediaType.isEqual(to: kUTTypeImage as String) {
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 buttonInPictureGridView[imagePicked].setImage(image, for: .normal)
+                }
             }
         }
         self.dismiss(animated: true, completion: nil)
@@ -217,6 +217,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
     }
+
 }
 
 
