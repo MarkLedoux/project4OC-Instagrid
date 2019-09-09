@@ -21,6 +21,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
+        startApplication(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout)
+
         let device = UIDevice.current
         device.beginGeneratingDeviceOrientationNotifications()
         let notificationCenter = NotificationCenter.default
@@ -210,6 +212,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 button.isSelected = isSelected
             }
         }
+    }
+
+    private func startApplication(collectionOfButtonToChangeLayout: [UIButton]) {
+        for button in collectionOfButtonToChangeLayout {
+            if button.tag == 1 {
+                buttonInPictureGridView[3].isHidden = true
+                button.isSelected = true
+                button.setImage(UIImage(named: "Selected"), for: .selected)
+            }
+        }
+
     }
 
 }
