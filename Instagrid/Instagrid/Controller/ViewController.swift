@@ -15,7 +15,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var labelForSwipe: UILabel!
     @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
     @IBOutlet var buttonInPictureGridView: [UIButton]!
-    @IBOutlet var pictureView: PictureGridView!
     var imagePicked = 0
 
     override func viewDidLoad() {
@@ -81,33 +80,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                                 UIButton.animate(withDuration: 0.2, animations: {
                                     sender.transform = CGAffineTransform.identity})
             })
-            //necessary to specify the sender is a specific UiButton with a specific CGRect frame?
-            let sender = sender
-            sender.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-            sender.isExclusiveTouch = true
-            sender.setBackgroundImage(sender.currentImage, for: .normal)
-            sender.setImage(UIImage(named: "Selected"), for: .selected)
-            sender.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            view.addSubview(sender)
-            dismiss(animated: true, completion: nil)
+            //necessary to specify the sender is a specific UiButton with a specific CGRect frame
 
             switch sender.tag {
             case 0:
                 // for the left button, concerning layout 1
                 hidingButtonInPictureView(topRightButtonIsHidden: true, bottomRightButtonIsHidden: false)
                 sender.isSelected = true
+                sender.setImage(UIImage(named: "Selected"), for: .selected)
 
                 disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 0, isSelected: false)
             case 1:
                 // for the middle button, concerning layout 2
                 hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: true)
                 sender.isSelected = true
+                sender.setImage(UIImage(named: "Selected"), for: .selected)
 
                 disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 1, isSelected: false)
             case 2:
                 // for the right button, concerning layout 3
                 hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: false)
                 sender.isSelected = true
+                sender.setImage(UIImage(named: "Selected"), for: .selected)
                 
                 disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 2, isSelected: false)
             default:
