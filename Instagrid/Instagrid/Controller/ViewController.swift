@@ -29,9 +29,51 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         notificationCenter.addObserver(self, selector: #selector(deviceOrientationChanged), name: Notification.Name("UIDeviceOrientationDidChangeNotification"), object: nil)
 
         checkInterfaceOrientation(interfaceOrientation: UIApplication.shared.statusBarOrientation)
+
+        let upRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
+        upRecognizer.direction = .up
+        self.view.addGestureRecognizer(upRecognizer)
+
+        let leftRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
+        leftRecognizer.direction = .left
+        self.view.addGestureRecognizer(leftRecognizer)
+
     }
 
-    //MARK: bottoms buttons actions
+    //MARK: - actions to share the images taken from the grid view using a swipe up when the device is in portrait and a left swipe when the device is in landscape
+    @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
+
+        //TODO: - refactor the code to be able to remove the code written from lines 188 to 206 and make it possible for the selector in the notificationCenter to take swipeMade as its selector
+        let orientation = UIDevice.current.orientation
+        switch orientation {
+        case .portrait, .portraitUpsideDown:
+            if orientation.isPortrait {
+                labelForSwipe.text = "Swipe up to share"
+                sender.direction = .up
+                let myAlert = UIAlertController(title: "Swipe up detected", message: "Great you've made an upward swipe!", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK!", style: .cancel) { (action) in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                    myAlert.addAction(okAction)
+                    self.present(myAlert, animated: true)
+            }
+        case .landscapeLeft, .landscapeRight:
+            if orientation.isLandscape {
+                labelForSwipe.text = "Swipe left to share"
+                sender.direction = .left
+                let myAlertForLandscape = UIAlertController(title: "Swipe left detected", message: "Great you've made a leftward swipe!", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK!", style: .cancel) { (action) in
+                    self.dismiss(animated: true, completion: nil)
+                } 
+                    myAlertForLandscape.addAction(okAction)
+                    self.present(myAlertForLandscape, animated: true)
+            }
+        default:
+            break
+        }
+    }
+
+    //MARK: - bottoms buttons actions
     //TODO: figure out how to place the Selected image according to the button without having to reference the spot and size specific CGRect
 
         @IBAction func buttonLayoutDidGetTapped(_ sender: UIButton) {
@@ -41,9 +83,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                                 UIButton.animate(withDuration: 0.2, animations: {
                                     sender.transform = CGAffineTransform.identity})
             })
+            //necessary to specify the sender is a specific UiButton with a specific CGRect frame?
             let sender = sender
             sender.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-            //necessary to specify the sender is a specific UiButton with a specific CGRect frame?
             sender.isExclusiveTouch = true
             sender.setBackgroundImage(sender.currentImage, for: .normal)
             sender.setImage(UIImage(named: "Selected"), for: .selected)
@@ -52,32 +94,30 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             dismiss(animated: true, completion: nil)
 
             switch sender.tag {
-            case 1:
+            case 0:
                 // for the left button, concerning layout 1
                 hidingButtonInPictureView(topRightButtonIsHidden: true, bottomRightButtonIsHidden: false)
                 sender.isSelected = true
 
-                disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 1, isSelected: false)
-            case 2:
+                disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 0, isSelected: false)
+            case 1:
                 // for the middle button, concerning layout 2
                 hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: true)
                 sender.isSelected = true
 
-                disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 2, isSelected: false)
-            case 3:
+                disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 1, isSelected: false)
+            case 2:
                 // for the right button, concerning layout 3
                 hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: false)
                 sender.isSelected = true
                 
-                disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 3, isSelected: false)
+                disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 2, isSelected: false)
             default:
                 break
             }
         }
 
-    //MARK: GridView buttons actions
-
-    //MARK: methods to open the camera or the photo library
+    //MARK: - methods to open the camera or the photo library
     @IBAction func buttonTapped(_ sender: UIButton) {
         let myAlert = UIAlertController(title: "Select Image from", message: "", preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
@@ -91,7 +131,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 self.present(imagePicker, animated: true, completion: nil)
             }
         }
-        let cameraRollAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
+        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
@@ -106,7 +146,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.dismiss(animated: true, completion: nil)
         }
         myAlert.addAction(cameraAction)
-        myAlert.addAction(cameraRollAction)
+        myAlert.addAction(photoLibraryAction)
         myAlert.addAction(cancelAction)
         self.present(myAlert, animated: true)
     }
@@ -117,8 +157,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 buttonInPictureGridView[imagePicked].setImage(image, for: .normal)
             }
-
-
         }
         self.dismiss(animated: true, completion: nil)
     }
@@ -130,8 +168,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
-    //MARK: methods to checks for device and for interface orientation when the app launches and when the app is running
-    func checkInterfaceOrientation(interfaceOrientation: UIInterfaceOrientation) {
+    //MARK: - methods to checks for device and for interface orientation when the app launches and when the app is running
+   private func checkInterfaceOrientation(interfaceOrientation: UIInterfaceOrientation) {
 
         switch interfaceOrientation {
         case .portrait, .portraitUpsideDown:
@@ -151,9 +189,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         inspectDeviceOrientation()
     }
 
-    func inspectDeviceOrientation() {
+    private func inspectDeviceOrientation() {
         let orientation = UIDevice.current.orientation
-        switch UIDevice.current.orientation {
+        switch orientation {
         case .portrait, .portraitUpsideDown:
             if orientation.isPortrait {
                 labelForSwipe.text = "Swipe up to share"
@@ -167,12 +205,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
-    func hidingButtonInPictureView(topRightButtonIsHidden: Bool, bottomRightButtonIsHidden: Bool) {
+   private func hidingButtonInPictureView(topRightButtonIsHidden: Bool, bottomRightButtonIsHidden: Bool) {
         buttonInPictureGridView[1].isHidden = topRightButtonIsHidden
         buttonInPictureGridView[3].isHidden = bottomRightButtonIsHidden
     }
 
-    func disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: [UIButton], value: Int, isSelected: Bool) {
+   private func disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: [UIButton], value: Int, isSelected: Bool) {
         for button in collectionOfButtonToChangeLayout {
             if button.tag != value {
                 button.isSelected = isSelected
