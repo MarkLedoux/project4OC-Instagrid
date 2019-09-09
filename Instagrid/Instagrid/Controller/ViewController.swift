@@ -12,16 +12,12 @@ import MobileCoreServices
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var newPic: Bool?
-    @IBOutlet var imageView: UIButton!
-    @IBOutlet var imageView2: UIButton!
-    @IBOutlet var imageView3: UIButton!
-    @IBOutlet var imageView4: UIButton!
 
     @IBOutlet weak var labelForSwipe: UILabel!
-    @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
     @IBOutlet var buttonInPictureGridView: [UIButton]!
     @IBOutlet var pictureView: PictureGridView!
+    var imagePicked = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +29,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         notificationCenter.addObserver(self, selector: #selector(deviceOrientationChanged), name: Notification.Name("UIDeviceOrientationDidChangeNotification"), object: nil)
 
         checkInterfaceOrientation(interfaceOrientation: UIApplication.shared.statusBarOrientation)
-
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(shareImage(_:)))
-        swipeUp.direction = .up
-        view.addGestureRecognizer(swipeUp)
     }
 
     //MARK: bottoms buttons actions
@@ -84,14 +76,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
 
     //MARK: GridView buttons actions
-    
-    @IBAction func shareImage(_ sender: UISwipeGestureRecognizer) {
-        let image = imagePicked
-        let imageToShare = [image!]
-        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
-
-        self.present(activityViewController, animated: true, completion: nil)
-    }
 
     //MARK: methods to open the camera or the photo library
     @IBAction func buttonTapped(_ sender: UIButton) {
@@ -103,8 +87,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 imagePicker.sourceType = UIImagePickerController.SourceType.camera
                 imagePicker.mediaTypes = [kUTTypeImage as String]
                 imagePicker.allowsEditing = true
+                self.imagePicked = sender.tag
                 self.present(imagePicker, animated: true, completion: nil)
-                self.newPic = true
             }
         }
         let cameraRollAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
@@ -114,8 +98,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
                 imagePicker.mediaTypes = [kUTTypeImage as String]
                 imagePicker.allowsEditing = true
+                self.imagePicked = sender.tag
                 self.present(imagePicker, animated: true, completion: nil)
-                self.newPic = false
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
@@ -130,13 +114,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let mediaType = info[UIImagePickerController.InfoKey.mediaType] as! NSString
         if mediaType.isEqual(to: kUTTypeImage as String) {
-            let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-            imageView.setBackgroundImage(UIImage(named: "Plus"), for: .normal)
-            imageView.setImage(image, for: .normal)
-
-            if newPic == true {
-                UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageError), nil)
+            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                buttonInPictureGridView[imagePicked].setImage(image, for: .normal)
             }
+
+
         }
         self.dismiss(animated: true, completion: nil)
     }
