@@ -15,6 +15,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var labelForSwipe: UILabel!
     @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
     @IBOutlet var buttonInPictureGridView: [UIButton]!
+    @IBOutlet var pictureGridView: PictureGridView!
+    var images = [UIImage]()
     var imagePicked = 0
 
     override func viewDidLoad() {
@@ -43,30 +45,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     //MARK: - actions to share the images taken from the grid view using a swipe up when the device is in portrait and a left swipe when the device is in landscape
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
-
-        //TODO: - refactor the code to be able to remove the code written from lines 188 to 206 and make it possible for the selector in the notificationCenter to take swipeMade as its selector
+        //TODO: - set the code to be able to combine all images when the swipe is made and share afterwards
         let orientation = UIDevice.current.orientation
-        switch orientation {
+            switch orientation {
         case .portrait, .portraitUpsideDown:
             if orientation.isPortrait {
                 sender.direction = .up
-                let myAlert = UIAlertController(title: "Swipe up detected", message: "Great you've made an upward swipe!", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK!", style: .cancel) { (action) in
-                    self.dismiss(animated: true, completion: nil)
-                }
-                myAlert.addAction(okAction)
-                self.present(myAlert, animated: true)
+
+                let image = combineImagesInPictureGridView(pictureGridView: pictureGridView)!
+                let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
             }
         case .landscapeLeft, .landscapeRight:
             if orientation.isLandscape {
                 sender.direction = .left
-                let myAlertForLandscape = UIAlertController(title: "Swipe left detected", message: "Great you've made a leftward swipe!", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK!", style: .cancel) { (action) in
-                    self.dismiss(animated: true, completion: nil)
-                } 
-                    myAlertForLandscape.addAction(okAction)
-                    self.present(myAlertForLandscape, animated: true)
-            }
+
+                let image = combineImagesInPictureGridView(pictureGridView: pictureGridView)!
+                let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
+                }
         default:
             break
         }
@@ -113,6 +114,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     //MARK: - methods to open the camera or the photo library
     @IBAction func buttonTapped(_ sender: UIButton) {
+        /* note: the specific action of displaying the alert through an action sheet has an effect of trigerring the console specific to iOS 12.2 and 12.3 as users online report not having this problem on previous iOS versions. The console error is reported as constraints which cannot be satisfied when the action sheet comes up into the screeen, the error being that the position, height and width of the action sheet are ambiguous in the UIView. This however seems to be a bug from Apple which still hasn't been fixed at the time of iOS 13.0 beta 7 as reported on the two StackOverFlow articles :
+         https://stackoverflow.com/questions/55653187/swift-default-alertviewcontroller-breaking-constraints
+         https://stackoverflow.com/questions/55372093/uialertcontrollers-actionsheet-gives-constraint-error-on-ios-12-2-12-3
+         */
+
         let myAlert = UIAlertController(title: "Select Image from", message: "", preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
@@ -225,6 +231,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     }
 
+    private func combineImagesInPictureGridView(pictureGridView: PictureGridView) -> UIImage? {
+
+            UIGraphicsBeginImageContext(pictureGridView.frame.size)
+        pictureGridView.layer.render(in: UIGraphicsGetCurrentContext()!)
+            UIGraphicsEndImageContext()
+        guard let combinedImage = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
+        return combinedImage
+    }
 }
 
 

@@ -253,6 +253,7 @@
                     </view>
                     <connections>
                         <outlet property="labelForSwipe" destination="IlF-6W-Aeg" id="2La-j1-Fai"/>
+                        <outlet property="pictureGridView" destination="5Ym-cW-p15" id="odh-nR-4WE"/>
                         <outletCollection property="buttonInPictureGridView" destination="I72-jr-7TJ" collectionClass="NSMutableArray" id="uiM-4s-7YV"/>
                         <outletCollection property="buttonInPictureGridView" destination="R5L-5Y-Xph" collectionClass="NSMutableArray" id="1O5-UZ-B77"/>
                         <outletCollection property="buttonInPictureGridView" destination="5aJ-8l-VEW" collectionClass="NSMutableArray" id="uRz-Cz-h0V"/>
