@@ -134,6 +134,12 @@
                                         <exclude reference="udb-qi-qjz"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outletCollection property="buttonInPictureGridView" destination="I72-jr-7TJ" collectionClass="NSMutableArray" id="gFF-mi-PfS"/>
+                                    <outletCollection property="buttonInPictureGridView" destination="R5L-5Y-Xph" collectionClass="NSMutableArray" id="Be3-dp-fTg"/>
+                                    <outletCollection property="buttonInPictureGridView" destination="5aJ-8l-VEW" collectionClass="NSMutableArray" id="xnk-Dg-1jw"/>
+                                    <outletCollection property="buttonInPictureGridView" destination="J6V-Si-rRv" collectionClass="NSMutableArray" id="BGG-Xa-8yV"/>
+                                </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleAspectFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="6ge-Mp-OMD">
                                 <rect key="frame" x="25" y="463" width="270" height="80"/>
@@ -252,8 +258,8 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="gridView" destination="5Ym-cW-p15" id="6AZ-hM-ZYk"/>
                         <outlet property="labelForSwipe" destination="IlF-6W-Aeg" id="2La-j1-Fai"/>
-                        <outlet property="pictureGridView" destination="5Ym-cW-p15" id="odh-nR-4WE"/>
                         <outletCollection property="buttonInPictureGridView" destination="I72-jr-7TJ" collectionClass="NSMutableArray" id="uiM-4s-7YV"/>
                         <outletCollection property="buttonInPictureGridView" destination="R5L-5Y-Xph" collectionClass="NSMutableArray" id="1O5-UZ-B77"/>
                         <outletCollection property="buttonInPictureGridView" destination="5aJ-8l-VEW" collectionClass="NSMutableArray" id="uRz-Cz-h0V"/>

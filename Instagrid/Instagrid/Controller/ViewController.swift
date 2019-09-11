@@ -15,7 +15,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var labelForSwipe: UILabel!
     @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
     @IBOutlet var buttonInPictureGridView: [UIButton]!
-    @IBOutlet var pictureGridView: PictureGridView!
+    @IBOutlet var gridView: PictureGridView!
+
     var images = [UIImage]()
     var imagePicked = 0
 
@@ -47,25 +48,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
         //TODO: - set the code to be able to combine all images when the swipe is made and share afterwards
         let orientation = UIDevice.current.orientation
+         let image = combineImagesInPictureGridView(gridView: gridView)
             switch orientation {
         case .portrait, .portraitUpsideDown:
             if orientation.isPortrait {
                 sender.direction = .up
 
-                let image = combineImagesInPictureGridView(pictureGridView: pictureGridView)!
                 let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
 
                 activityViewController.popoverPresentationController?.sourceView = self.view
+                activityViewController.view.layoutIfNeeded()
                 self.present(activityViewController, animated: true, completion: nil)
             }
         case .landscapeLeft, .landscapeRight:
             if orientation.isLandscape {
                 sender.direction = .left
 
-                let image = combineImagesInPictureGridView(pictureGridView: pictureGridView)!
                 let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
 
                 activityViewController.popoverPresentationController?.sourceView = self.view
+                activityViewController.view.layoutIfNeeded()
                 self.present(activityViewController, animated: true, completion: nil)
                 }
         default:
@@ -231,13 +233,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     }
 
-    private func combineImagesInPictureGridView(pictureGridView: PictureGridView) -> UIImage? {
+    func combineImagesInPictureGridView(gridView: PictureGridView) -> UIImage {
 
-            UIGraphicsBeginImageContext(pictureGridView.frame.size)
-        pictureGridView.layer.render(in: UIGraphicsGetCurrentContext()!)
-            UIGraphicsEndImageContext()
-        guard let combinedImage = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
-        return combinedImage
+        let render = UIGraphicsImageRenderer(size: gridView.frame.size)
+        let image = render.image { ctx in
+            gridView.drawHierarchy(in: gridView.bounds, afterScreenUpdates: true)
+        }
+
+        return image
     }
 }
 
