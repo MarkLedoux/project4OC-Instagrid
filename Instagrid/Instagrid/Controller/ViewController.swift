@@ -159,6 +159,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if mediaType.isEqual(to: kUTTypeImage as String) {
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 buttonInPictureGridView[imagePicked].setImage(image, for: .normal)
+                buttonInPictureGridView[imagePicked].imageView?.contentMode = .scaleAspectFill
                 }
             }
         }
@@ -231,16 +232,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
 
-    }
-
-    func combineImagesInPictureGridView(gridView: PictureGridView) -> UIImage {
-
-        let render = UIGraphicsImageRenderer(size: gridView.frame.size)
-        let image = render.image { ctx in
-            gridView.drawHierarchy(in: gridView.bounds, afterScreenUpdates: true)
-        }
-
-        return image
     }
 }
 
