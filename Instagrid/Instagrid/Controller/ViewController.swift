@@ -17,6 +17,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet var buttonInPictureGridView: [UIButton]!
     @IBOutlet var gridView: PictureGridView!
 
+    var pictureGrid = PictureGrid()
     var images = [UIImage]()
     var imagePicked = 0
 
@@ -48,7 +49,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
         //TODO: - set the code to be able to combine all images when the swipe is made and share afterwards
         let orientation = UIDevice.current.orientation
-         let image = combineImagesInPictureGridView(gridView: gridView)
+        let image = pictureGrid.combineImagesInPictureGridView(gridView: gridView)
             switch orientation {
         case .portrait, .portraitUpsideDown:
             if orientation.isPortrait {
