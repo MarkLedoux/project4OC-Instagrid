@@ -47,16 +47,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     //MARK: - actions to share the images taken from the grid view using a swipe up when the device is in portrait and a left swipe when the device is in landscape
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
-        //TODO: - set the code to be able to combine all images when the swipe is made and share afterwards
+
         let orientation = UIDevice.current.orientation
         let image = pictureGrid.combineImagesInPictureGridView(gridView: gridView)
             switch orientation {
         case .portrait, .portraitUpsideDown:
             if orientation.isPortrait {
                 sender.direction = .up
+                animateSwipe(translationX: 0, y: -view.frame.height)
 
                 let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-
                 activityViewController.popoverPresentationController?.sourceView = self.view
                 activityViewController.view.layoutIfNeeded()
                 self.present(activityViewController, animated: true, completion: nil)
@@ -64,6 +64,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         case .landscapeLeft, .landscapeRight:
             if orientation.isLandscape {
                 sender.direction = .left
+                animateSwipe(translationX: -view.frame.width, y: 0)
 
                 let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
 
@@ -233,6 +234,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
 
+    }
+
+    private func animateSwipe(translationX x: CGFloat, y: CGFloat) {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.gridView.transform = CGAffineTransform(translationX: x, y: y)
+        })
     }
 }
 
