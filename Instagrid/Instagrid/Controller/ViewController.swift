@@ -60,6 +60,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 activityViewController.popoverPresentationController?.sourceView = self.view
                 activityViewController.view.layoutIfNeeded()
                 self.present(activityViewController, animated: true, completion: nil)
+                resetLayout(sender)
                 startApplication(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout)
             }
         case .landscapeLeft, .landscapeRight:
@@ -80,16 +81,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     //MARK: - bottoms buttons actions
-    //TODO: figure out how to place the Selected image according to the button without having to reference the spot and size specific CGRect
 
         @IBAction func buttonLayoutDidGetTapped(_ sender: UIButton) {
-            UIButton.animate(withDuration: 0.2,animations: {
-                sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
-                             completion: { finish in
-                                UIButton.animate(withDuration: 0.2, animations: {
-                                    sender.transform = CGAffineTransform.identity})
-            })
-            //necessary to specify the sender is a specific UiButton with a specific CGRect frame
+            animateButton(sender)
 
             switch sender.tag {
             case 0:
@@ -124,12 +118,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
          https://stackoverflow.com/questions/55653187/swift-default-alertviewcontroller-breaking-constraints
          https://stackoverflow.com/questions/55372093/uialertcontrollers-actionsheet-gives-constraint-error-on-ios-12-2-12-3
          */
-        UIButton.animate(withDuration: 0.1,animations: {
-            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
-                         completion: { finish in
-                            UIButton.animate(withDuration: 0.2, animations: {
-                                sender.transform = CGAffineTransform.identity})
-        })
+        animateButton(sender)
 
         let myAlert = UIAlertController(title: "Select Image from", message: "", preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
@@ -251,8 +240,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         })
     }
 
-    private func resetLayout() {
-        
+    private func resetLayout(_ sender: UISwipeGestureRecognizer) {
+        if sender.state == .ended || sender.state == .cancelled {
+            UIView.animate(withDuration: 5, animations: {
+                self.gridView.transform = CGAffineTransform(translationX: 0, y: 0)
+            })
+        }
+        for button in buttonInPictureGridView {
+            button.setBackgroundImage(UIImage(named: "Plus"), for: .normal)
+            button.imageView?.contentMode = .scaleAspectFill
+        }
+
+    }
+
+    private func animateButton(_ sender: UIButton) {
+        UIButton.animate(withDuration: 0.2,animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
+                         completion: { finish in
+                            UIButton.animate(withDuration: 0.2, animations: {
+                                sender.transform = CGAffineTransform.identity})
+        })
     }
 }
 
