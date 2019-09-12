@@ -60,6 +60,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 activityViewController.popoverPresentationController?.sourceView = self.view
                 activityViewController.view.layoutIfNeeded()
                 self.present(activityViewController, animated: true, completion: nil)
+                startApplication(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout)
             }
         case .landscapeLeft, .landscapeRight:
             if orientation.isLandscape {
@@ -71,6 +72,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 activityViewController.popoverPresentationController?.sourceView = self.view
                 activityViewController.view.layoutIfNeeded()
                 self.present(activityViewController, animated: true, completion: nil)
+
                 }
         default:
             break
@@ -122,6 +124,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
          https://stackoverflow.com/questions/55653187/swift-default-alertviewcontroller-breaking-constraints
          https://stackoverflow.com/questions/55372093/uialertcontrollers-actionsheet-gives-constraint-error-on-ios-12-2-12-3
          */
+        UIButton.animate(withDuration: 0.1,animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
+                         completion: { finish in
+                            UIButton.animate(withDuration: 0.2, animations: {
+                                sender.transform = CGAffineTransform.identity})
+        })
 
         let myAlert = UIAlertController(title: "Select Image from", message: "", preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
@@ -231,6 +239,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 buttonInPictureGridView[3].isHidden = true
                 button.isSelected = true
                 button.setImage(UIImage(named: "Selected"), for: .selected)
+                disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 1, isSelected: false)
             }
         }
 
@@ -240,6 +249,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIView.animate(withDuration: 0.5, animations: {
             self.gridView.transform = CGAffineTransform(translationX: x, y: y)
         })
+    }
+
+    private func resetLayout() {
+        
     }
 }
 
