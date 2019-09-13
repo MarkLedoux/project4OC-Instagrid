@@ -227,6 +227,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIView.animate(withDuration: 0.5, animations: {
                 self.gridView.transform = CGAffineTransform(translationX: 0, y: 0)
             })
+        startApplication(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout)
         for button in buttonInPictureGridView {
             button.setImage(UIImage(named: "Plus"), for: .normal)
             button.imageView?.contentMode = .scaleAspectFill
@@ -296,7 +297,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                                       handler: {(_: UIAlertAction!) in
                                         //Sign out action
                                         self.resetLayout(sender)
-                                        self.startApplication(collectionOfButtonToChangeLayout: self.collectionOfButtonToChangeLayout)
         }))
         self.present(alert, animated: true, completion: nil)
     }
