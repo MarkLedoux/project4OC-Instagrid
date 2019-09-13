@@ -44,6 +44,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     //MARK: - actions to share the images taken from the grid view using a swipe up when the device is in portrait and a left swipe when the device is in landscape
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
+//        imageNotChosen(sender)
         let orientation = UIDevice.current.orientation
             switch orientation {
         case .portrait, .portraitUpsideDown:
@@ -252,9 +253,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.present(activityViewController, animated: true, completion: nil)
         activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
             if completed {
-                let alert = UIAlertController(title: "Great!", message: "Your image has been shared",         preferredStyle: UIAlertController.Style.alert)
+                let alert = UIAlertController(title: "Great!", message: "Your image has been shared", preferredStyle: UIAlertController.Style.alert)
 
-                alert.addAction(UIAlertAction(title: "OK!",
+                alert.addAction(UIAlertAction(title: "Awesome!",
                                               style: UIAlertAction.Style.default,
                                               handler: {(_: UIAlertAction!) in
                                                 //Sign out action
@@ -277,17 +278,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     private func imageNotChosen(_ sender: UISwipeGestureRecognizer) {
         //TODO: - change the loop to reflect all possibilities and remove the warning
         for button in buttonInPictureGridView {
-            switch button.tag {
-            case 0, 2:
-                if button.currentImage == UIImage(named: "Plus") {
+                if button.currentImage != button.image(for: .normal) {
                     imageNotChosen(sender)
-                }
-            case 1, 3:
-                if button.isHidden == true {
-                    button.currentImage != UIImage(named: "Plus")
-                }
-            default:
-                break
+                } else {
+                    swipeMade(sender)
             }
         }
         let alert = UIAlertController(title: "Error", message: "You didn't choose images!", preferredStyle: UIAlertController.Style.alert)
