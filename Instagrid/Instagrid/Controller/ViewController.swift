@@ -44,21 +44,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     //MARK: - actions to share the images taken from the grid view using a swipe up when the device is in portrait and a left swipe when the device is in landscape
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
-        //TODO: - change the loop to reflect all possibilities and remove the warning
-        for button in buttonInPictureGridView {
-            switch button.tag {
-            case 0, 2:
-                if button.currentImage == UIImage(named: "Plus") {
-                    imageNotChosen(sender)
-                }
-            case 1, 3:
-                if button.isHidden == true {
-                    button.currentImage != UIImage(named: "Plus")
-                }
-            default:
-                break
-            }
-        }
         let orientation = UIDevice.current.orientation
             switch orientation {
         case .portrait, .portraitUpsideDown:
@@ -289,6 +274,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     private func imageNotChosen(_ sender: UISwipeGestureRecognizer) {
+        //TODO: - change the loop to reflect all possibilities and remove the warning
+        for button in buttonInPictureGridView {
+            switch button.tag {
+            case 0, 2:
+                if button.currentImage == UIImage(named: "Plus") {
+                    imageNotChosen(sender)
+                }
+            case 1, 3:
+                if button.isHidden == true {
+                    button.currentImage != UIImage(named: "Plus")
+                }
+            default:
+                break
+            }
+        }
         let alert = UIAlertController(title: "Error", message: "You didn't choose images!", preferredStyle: UIAlertController.Style.alert)
 
         alert.addAction(UIAlertAction(title: "Choose an image",
