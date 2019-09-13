@@ -60,8 +60,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 activityViewController.popoverPresentationController?.sourceView = self.view
                 activityViewController.view.layoutIfNeeded()
                 self.present(activityViewController, animated: true, completion: nil)
-                resetLayout(sender)
-                startApplication(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout)
+                activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
+                    if completed {
+                        let alert = UIAlertController(title: "Great!", message: "Your image has been shared",         preferredStyle: UIAlertController.Style.alert)
+
+                        alert.addAction(UIAlertAction(title: "OK!",
+                                                      style: UIAlertAction.Style.default,
+                                                      handler: {(_: UIAlertAction!) in
+                                                        //Sign out action
+                                                        self.resetLayout(sender)
+                                                        self.startApplication(collectionOfButtonToChangeLayout: self.collectionOfButtonToChangeLayout)
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                        return
+                    } else {
+                        let alert = UIAlertController(title: "Error!", message: "Something wrong happened, please try again.", preferredStyle: .alert)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
             }
         case .landscapeLeft, .landscapeRight:
             if orientation.isLandscape {
@@ -241,13 +257,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     private func resetLayout(_ sender: UISwipeGestureRecognizer) {
-        if sender.state == .ended || sender.state == .cancelled {
-            UIView.animate(withDuration: 5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
                 self.gridView.transform = CGAffineTransform(translationX: 0, y: 0)
             })
-        }
         for button in buttonInPictureGridView {
-            button.setBackgroundImage(UIImage(named: "Plus"), for: .normal)
+            button.setImage(UIImage(named: "Plus"), for: .normal)
             button.imageView?.contentMode = .scaleAspectFill
         }
 
