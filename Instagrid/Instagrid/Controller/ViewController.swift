@@ -49,47 +49,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
 
         let orientation = UIDevice.current.orientation
-        let image = pictureGrid.combineImagesInPictureGridView(gridView: gridView)
             switch orientation {
         case .portrait, .portraitUpsideDown:
             if orientation.isPortrait {
                 sender.direction = .up
                 animateSwipe(translationX: 0, y: -view.frame.height)
-
-                let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.view
-                activityViewController.view.layoutIfNeeded()
-                self.present(activityViewController, animated: true, completion: nil)
-                activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
-                    if completed {
-                        let alert = UIAlertController(title: "Great!", message: "Your image has been shared",         preferredStyle: UIAlertController.Style.alert)
-
-                        alert.addAction(UIAlertAction(title: "OK!",
-                                                      style: UIAlertAction.Style.default,
-                                                      handler: {(_: UIAlertAction!) in
-                                                        //Sign out action
-                                                        self.resetLayout(sender)
-                                                        self.startApplication(collectionOfButtonToChangeLayout: self.collectionOfButtonToChangeLayout)
-                        }))
-                        self.present(alert, animated: true, completion: nil)
-                        return
-                    } else {
-                        let alert = UIAlertController(title: "Error!", message: "Something wrong happened, please try again.", preferredStyle: .alert)
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
+                activityViewController(sender)
             }
         case .landscapeLeft, .landscapeRight:
             if orientation.isLandscape {
                 sender.direction = .left
                 animateSwipe(translationX: -view.frame.width, y: 0)
-
-                let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-
-                activityViewController.popoverPresentationController?.sourceView = self.view
-                activityViewController.view.layoutIfNeeded()
-                self.present(activityViewController, animated: true, completion: nil)
-
+                activityViewController(sender)
                 }
         default:
             break
@@ -247,7 +218,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 1, isSelected: false)
             }
         }
-
     }
 
     private func animateSwipe(translationX x: CGFloat, y: CGFloat) {
@@ -264,7 +234,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             button.setImage(UIImage(named: "Plus"), for: .normal)
             button.imageView?.contentMode = .scaleAspectFill
         }
-
     }
 
     private func animateButton(_ sender: UIButton) {
@@ -274,6 +243,39 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             UIButton.animate(withDuration: 0.2, animations: {
                                 sender.transform = CGAffineTransform.identity})
         })
+    }
+
+    private func activityViewController(_ sender: UISwipeGestureRecognizer) {
+        let image = pictureGrid.combineImagesInPictureGridView(gridView: gridView)
+        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.view.layoutIfNeeded()
+        self.present(activityViewController, animated: true, completion: nil)
+        activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
+            if completed {
+                let alert = UIAlertController(title: "Great!", message: "Your image has been shared",         preferredStyle: UIAlertController.Style.alert)
+
+                alert.addAction(UIAlertAction(title: "OK!",
+                                              style: UIAlertAction.Style.default,
+                                              handler: {(_: UIAlertAction!) in
+                                                //Sign out action
+                                                self.resetLayout(sender)
+                                                self.startApplication(collectionOfButtonToChangeLayout: self.collectionOfButtonToChangeLayout)
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+                    self.resetLayout(sender)
+                }))
+                self.present(alert, animated: true, completion: nil)
+                return
+            } else {
+                let error = UIAlertController(title: "Error!", message: "Something wrong happened, please try again.", preferredStyle: .alert)
+                error.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+                    self.resetLayout(sender)
+                }))
+
+                self.present(error, animated: true, completion: nil)
+            }
+        }
     }
 }
 
