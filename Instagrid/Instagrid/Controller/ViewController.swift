@@ -11,7 +11,6 @@ import MobileCoreServices
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-
     @IBOutlet weak var labelForSwipe: UILabel!
     @IBOutlet var collectionOfButtonToChangeLayout: [UIButton]!
     @IBOutlet var buttonInPictureGridView: [UIButton]!
@@ -41,13 +40,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let leftRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
         leftRecognizer.direction = .left
         self.view.addGestureRecognizer(leftRecognizer)
-
-
     }
 
     //MARK: - actions to share the images taken from the grid view using a swipe up when the device is in portrait and a left swipe when the device is in landscape
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
-
+        //TODO: - change the loop to reflect all possibilities and remove the warning
+        for button in buttonInPictureGridView {
+            switch button.tag {
+            case 0, 2:
+                if button.currentImage == UIImage(named: "Plus") {
+                    imageNotChosen(sender)
+                }
+            case 1, 3:
+                if button.isHidden == true {
+                    button.currentImage != UIImage(named: "Plus")
+                }
+            default:
+                break
+            }
+        }
         let orientation = UIDevice.current.orientation
             switch orientation {
         case .portrait, .portraitUpsideDown:
@@ -146,6 +157,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 buttonInPictureGridView[imagePicked].setImage(image, for: .normal)
                 buttonInPictureGridView[imagePicked].imageView?.contentMode = .scaleAspectFill
+                buttonInPictureGridView[imagePicked].clipsToBounds = true
                 }
             }
         }
@@ -159,7 +171,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
-    //MARK: - methods to checks for device and for interface orientation when the app launches and when the app is running
+    //MARK: - private methods only used in the file itself
    private func checkInterfaceOrientation(interfaceOrientation: UIInterfaceOrientation) {
 
         switch interfaceOrientation {
@@ -233,6 +245,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         for button in buttonInPictureGridView {
             button.setImage(UIImage(named: "Plus"), for: .normal)
             button.imageView?.contentMode = .scaleAspectFill
+            button.clipsToBounds = true
         }
     }
 
@@ -262,9 +275,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                                                 self.resetLayout(sender)
                                                 self.startApplication(collectionOfButtonToChangeLayout: self.collectionOfButtonToChangeLayout)
                 }))
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
-                    self.resetLayout(sender)
-                }))
                 self.present(alert, animated: true, completion: nil)
                 return
             } else {
@@ -277,7 +287,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
     }
+
+    private func imageNotChosen(_ sender: UISwipeGestureRecognizer) {
+        let alert = UIAlertController(title: "Error", message: "You didn't choose images!", preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "Choose an image",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {(_: UIAlertAction!) in
+                                        //Sign out action
+                                        self.resetLayout(sender)
+                                        self.startApplication(collectionOfButtonToChangeLayout: self.collectionOfButtonToChangeLayout)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
-
-
-
