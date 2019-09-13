@@ -209,7 +209,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     private func startApplication(collectionOfButtonToChangeLayout: [UIButton]) {
         for button in collectionOfButtonToChangeLayout {
             if button.tag == 1 {
-                buttonInPictureGridView[3].isHidden = true
+                hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: true)
                 button.isSelected = true
                 button.setImage(UIImage(named: "Selected"), for: .selected)
                 disableButtonWhenGivenValueIsDifferent(collectionOfButtonToChangeLayout: collectionOfButtonToChangeLayout, value: 1, isSelected: false)
