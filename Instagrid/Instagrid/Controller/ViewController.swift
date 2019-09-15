@@ -45,7 +45,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     // MARK: - animate the view after detecting swipe direction
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
-//        imageNotChosen(sender)
+        imageNotChosen(sender)
         let orientation = UIDevice.current.orientation
             switch orientation {
             case .portrait, .portraitUpsideDown:
@@ -274,12 +274,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     private func imageNotChosen(_ sender: UISwipeGestureRecognizer) {
-        //TODO: - change the loop to reflect all possibilities and remove the warning
-        for button in gridViewButton  where button.isHidden {
-                if button.currentImage == UIImage(named: "Plus") {
-                    button.image(for: .normal) == nil
-                } else {
-                    button.image(for: .normal) != nil
+        for button in gridViewButton where button.isHidden == false && button.currentImage == UIImage(named: "Plus") {
                     let message = "You didn't choose images!"
                     let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
 
@@ -289,7 +284,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                                                     self.resetLayout(sender)
                     }))
                     self.present(alert, animated: true, completion: nil)
-            }
         }
     }
 }
