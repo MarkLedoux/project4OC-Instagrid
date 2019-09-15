@@ -274,7 +274,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     private func imageNotChosen(_ sender: UISwipeGestureRecognizer) {
-        for button in gridViewButton where button.isHidden == false && button.currentImage == UIImage(named: "Plus") {
+        let image = UIImage(named: "Plus")
+        for button in gridViewButton where button.isHidden == false && button.currentImage == image {
                     let message = "You didn't choose images!"
                     let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
 
