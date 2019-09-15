@@ -14,7 +14,7 @@ struct PictureGrid {
     func combineImagesInPictureGridView(gridView: PictureGridView) -> UIImage {
 
         let render = UIGraphicsImageRenderer(size: gridView.frame.size)
-        let image = render.image { ctx in
+        let image = render.image { _ in
             gridView.drawHierarchy(in: gridView.bounds, afterScreenUpdates: true)
         }
         return image

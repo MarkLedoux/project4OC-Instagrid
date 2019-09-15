@@ -260,13 +260,13 @@
                     <connections>
                         <outlet property="gridView" destination="5Ym-cW-p15" id="6AZ-hM-ZYk"/>
                         <outlet property="labelForSwipe" destination="IlF-6W-Aeg" id="2La-j1-Fai"/>
-                        <outletCollection property="collectionOfButtonToChangeLayout" destination="D3T-rJ-ob1" collectionClass="NSMutableArray" id="OU9-GT-Ftb"/>
-                        <outletCollection property="collectionOfButtonToChangeLayout" destination="G8J-DS-eZW" collectionClass="NSMutableArray" id="a24-7k-kJX"/>
-                        <outletCollection property="collectionOfButtonToChangeLayout" destination="pOP-am-koh" collectionClass="NSMutableArray" id="zhd-6x-Ptc"/>
-                        <outletCollection property="buttonInPictureGridView" destination="I72-jr-7TJ" collectionClass="NSMutableArray" id="U3Z-Fk-3cw"/>
-                        <outletCollection property="buttonInPictureGridView" destination="R5L-5Y-Xph" collectionClass="NSMutableArray" id="b8J-83-l7R"/>
-                        <outletCollection property="buttonInPictureGridView" destination="5aJ-8l-VEW" collectionClass="NSMutableArray" id="u7T-pn-duq"/>
-                        <outletCollection property="buttonInPictureGridView" destination="J6V-Si-rRv" collectionClass="NSMutableArray" id="B1Q-zq-XaU"/>
+                        <outletCollection property="changeLayoutButton" destination="D3T-rJ-ob1" collectionClass="NSMutableArray" id="OU9-GT-Ftb"/>
+                        <outletCollection property="changeLayoutButton" destination="G8J-DS-eZW" collectionClass="NSMutableArray" id="a24-7k-kJX"/>
+                        <outletCollection property="changeLayoutButton" destination="pOP-am-koh" collectionClass="NSMutableArray" id="zhd-6x-Ptc"/>
+                        <outletCollection property="gridViewButton" destination="I72-jr-7TJ" collectionClass="NSMutableArray" id="U3Z-Fk-3cw"/>
+                        <outletCollection property="gridViewButton" destination="R5L-5Y-Xph" collectionClass="NSMutableArray" id="b8J-83-l7R"/>
+                        <outletCollection property="gridViewButton" destination="5aJ-8l-VEW" collectionClass="NSMutableArray" id="u7T-pn-duq"/>
+                        <outletCollection property="gridViewButton" destination="J6V-Si-rRv" collectionClass="NSMutableArray" id="B1Q-zq-XaU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
