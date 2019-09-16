@@ -11,11 +11,14 @@ import MobileCoreServices
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    // MARK: - @IBOutlets
+
     @IBOutlet weak var labelForSwipe: UILabel!
     @IBOutlet var changeLayoutButton: [UIButton]!
     @IBOutlet var gridViewButton: [UIButton]!
     @IBOutlet var gridView: PictureGridView!
 
+    // MARK: - Properties
     var pictureGrid = PictureGrid()
     var images = [UIImage]()
     var imagePicked = 0
@@ -24,10 +27,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
+        // selection layout 2 as default layout when application starts and applying the selected design to all buttons in the view
         startApplication(changeLayoutButton: changeLayoutButton)
         buttonDesignGridView()
         buttonDesignLayout()
 
+        // observing device and interface orientation which will decide what some elements in the view should display
         let device = UIDevice.current
         device.beginGeneratingDeviceOrientationNotifications()
         let notificationCenter = NotificationCenter.default
@@ -36,6 +41,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         checkInterfaceOrientation(interfaceOrientation: UIApplication.shared.statusBarOrientation)
 
+        // implementing recognition of swipe for up and left movements
         let upRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
         upRecognizer.direction = .up
         self.view.addGestureRecognizer(upRecognizer)
@@ -45,7 +51,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.view.addGestureRecognizer(leftRecognizer)
     }
 
-    // MARK: - animate the view after detecting swipe direction
+    // MARK: - @IBAction methods for swipe, layout buttons and grid view buttons
+
+    //implementing two possible cases when the swipe is made, those vary through the interface and device orientation
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
         imageNotChosen(sender)
         let orientation = UIDevice.current.orientation
@@ -67,9 +75,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
-    // MARK: - bottoms buttons actions
-
-        @IBAction func buttonLayoutDidGetTapped(_ sender: UIButton) {
+    // three possible cases when a change of layout is made each action hiding or showing button(s)
+    @IBAction func buttonLayoutDidGetTapped(_ sender: UIButton) {
             animateButton(sender)
 
             switch sender.tag {
@@ -96,7 +103,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
 
-    // MARK: - methods to open the camera or the photo library
+    // action sheet for the UIImagePickerController, common to all buttons in grid view
     @IBAction func buttonTapped(_ sender: UIButton) {
         /* note: the specific action of displaying the alert through an action sheet has an effect of trigerring the console specific to iOS 12.2 and 12.3 as users online report not having this problem on previous iOS versions. The console error is reported as constraints which cannot be satisfied when the action sheet comes up into the screeen, the error being that the position, height and width of the action sheet are ambiguous in the UIView. This however seems to be a bug from Apple which still hasn't been fixed at the time of iOS 13.0 beta 7 as reported on the two StackOverFlow articles :
          https://stackoverflow.com/questions/55653187/swift-default-alertviewcontroller-breaking-constraints
@@ -110,6 +117,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerController.SourceType.camera
+                // makes it so that the user can only pick still images to share
                 imagePicker.mediaTypes = [kUTTypeImage as String]
                 imagePicker.allowsEditing = true
                 self.imagePicked = sender.tag
@@ -137,6 +145,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.present(myAlert, animated: true)
     }
 
+    // pciking image and setting it to the button
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? NSString {
         if mediaType.isEqual(to: kUTTypeImage as String) {
@@ -150,15 +159,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.dismiss(animated: true, completion: nil)
     }
 
-    @objc func imageError(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo: UnsafeRawPointer) {
-        if error != nil {
-            let message = "Failed to save image"
-            let alert = UIAlertController(title: "Save failed", message: message, preferredStyle: .alert)
-            self.present(alert, animated: true, completion: nil)
-        }
+    // MARK: - @obj methods
+
+    @objc func deviceOrientationChanged() {
+        inspectDeviceOrientation()
     }
 
-    // MARK: - private methods only used in the file itself
+    // MARK: - private methods
+
+    // different interface orientation calls for different text to display on screen
    private func checkInterfaceOrientation(interfaceOrientation: UIInterfaceOrientation) {
 
         switch interfaceOrientation {
@@ -175,10 +184,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
-    @objc func deviceOrientationChanged() {
-        inspectDeviceOrientation()
-    }
-
+    // different device orientation calls for different text displayed on screen
     private func inspectDeviceOrientation() {
         let orientation = UIDevice.current.orientation
         switch orientation {
@@ -195,17 +201,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
+    // boolean parameters to hide buttons in grid view, used in with the layout buttons
    private func hidingButtonInPictureView(topRightButtonIsHidden: Bool, bottomRightButtonIsHidden: Bool) {
         gridViewButton[1].isHidden = topRightButtonIsHidden
         gridViewButton[3].isHidden = bottomRightButtonIsHidden
     }
 
+    // disabling button aside from the selected button
    private func disableLayoutButton(changeLayoutButton: [UIButton], value: Int, isSelected: Bool) {
     for button in changeLayoutButton where button.tag != value {
                 button.isSelected = isSelected
         }
     }
 
+    // starting application with the middle layout button selected and disabling the others
     private func startApplication(changeLayoutButton: [UIButton]) {
         for button in changeLayoutButton where button.tag == 1 {
                 hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: true)
@@ -215,12 +224,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
+    // swipe animation
     private func animateSwipe(translationX x: CGFloat, y: CGFloat) {
         UIView.animate(withDuration: 0.5, animations: {
             self.gridView.transform = CGAffineTransform(translationX: x, y: y)
         })
     }
 
+    // resting view in layout through an animation and setting all buttons to their beginning images
     private func resetLayout(_ sender: UISwipeGestureRecognizer) {
         UIView.animate(withDuration: 0.5, animations: {
                 self.gridView.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -233,6 +244,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
+    // buttons animation for the layout and the grid view
     private func animateButton(_ sender: UIButton) {
         UIButton.animate(withDuration: 0.2, animations: {
             sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)},
@@ -242,6 +254,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         })
     }
 
+    // rounding corners for buttons in grid view
     private func buttonDesignGridView() {
         for button in gridViewButton {
             button.layer.cornerRadius = 4
@@ -249,6 +262,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
+    //rounding corners for buttons in layout row
     private func buttonDesignLayout() {
         for button in changeLayoutButton {
             button.layer.cornerRadius = 3
@@ -256,6 +270,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
+    // opening activity view controller after the swipe is made
     private func activityViewController(_ sender: UISwipeGestureRecognizer) {
         let image = pictureGrid.combineImage(gridView: gridView)
         let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
@@ -263,6 +278,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         activityVC.view.layoutIfNeeded()
         self.present(activityVC, animated: true, completion: nil)
         activityVC.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
+            // on completion an alert is presented to the user confirming the image has been shared
             if completed {
                 let message = "Your image has been shared"
                 let alert = UIAlertController(title: "Great!", message: message, preferredStyle: .alert)
@@ -276,6 +292,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 self.present(alert, animated: true, completion: nil)
                 return
             } else {
+                // if the user quits before sharing, an error is presented and the layout is reset
                 let message = "Something wrong happened, please try again"
                 let error = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
                 error.addAction(UIAlertAction(title: "Ok", style: .default, handler: {(_: UIAlertAction!) in
@@ -287,10 +304,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
+    // checks if the user has filled all showing buttons wih different images than those use by default when the app starts
     private func imageNotChosen(_ sender: UISwipeGestureRecognizer) {
         let image = UIImage(named: "Plus")
         for button in gridViewButton where button.isHidden == false && button.currentImage == image {
                     let message = "You didn't choose images!"
+            // displaying an error when the grid is not full and resetting layout 
                     let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Choose an image", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
                                                     self.resetLayout(sender)
