@@ -11,7 +11,7 @@ import UIKit
 
 struct PictureGrid {
 
-    func combineImagesInPictureGridView(gridView: PictureGridView) -> UIImage {
+    func combineImage(gridView: PictureGridView) -> UIImage {
 
         let render = UIGraphicsImageRenderer(size: gridView.frame.size)
         let image = render.image { _ in

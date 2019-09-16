@@ -96,7 +96,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     // MARK: - methods to open the camera or the photo library
     @IBAction func buttonTapped(_ sender: UIButton) {
-        // swiftlint:disable:next line_length
         /* note: the specific action of displaying the alert through an action sheet has an effect of trigerring the console specific to iOS 12.2 and 12.3 as users online report not having this problem on previous iOS versions. The console error is reported as constraints which cannot be satisfied when the action sheet comes up into the screeen, the error being that the position, height and width of the action sheet are ambiguous in the UIView. This however seems to be a bug from Apple which still hasn't been fixed at the time of iOS 13.0 beta 7 as reported on the two StackOverFlow articles :
          https://stackoverflow.com/questions/55653187/swift-default-alertviewcontroller-breaking-constraints
          https://stackoverflow.com/questions/55372093/uialertcontrollers-actionsheet-gives-constraint-error-on-ios-12-2-12-3
@@ -214,7 +213,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
-    // swiftlint:disable:next identifier_name
     private func animateSwipe(translationX x: CGFloat, y: CGFloat) {
         UIView.animate(withDuration: 0.5, animations: {
             self.gridView.transform = CGAffineTransform(translationX: x, y: y)
@@ -243,12 +241,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     private func activityViewController(_ sender: UISwipeGestureRecognizer) {
-        let image = pictureGrid.combineImagesInPictureGridView(gridView: gridView)
-        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        activityViewController.view.layoutIfNeeded()
-        self.present(activityViewController, animated: true, completion: nil)
-        activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
+        let image = pictureGrid.combineImage(gridView: gridView)
+        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
+        activityVC.view.layoutIfNeeded()
+        self.present(activityVC, animated: true, completion: nil)
+        activityVC.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
             if completed {
                 let message = "Your image has been shared"
                 let alert = UIAlertController(title: "Great!", message: message, preferredStyle: .alert)
@@ -278,10 +276,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         for button in gridViewButton where button.isHidden == false && button.currentImage == image {
                     let message = "You didn't choose images!"
                     let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-
-                    alert.addAction(UIAlertAction(title: "Choose an image",
-                                                  style: UIAlertAction.Style.default,
-                                                  handler: {(_: UIAlertAction!) in
+                    alert.addAction(UIAlertAction(title: "Choose an image", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
                                                     self.resetLayout(sender)
                     }))
                     self.present(alert, animated: true, completion: nil)
