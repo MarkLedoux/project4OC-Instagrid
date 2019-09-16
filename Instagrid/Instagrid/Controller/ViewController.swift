@@ -25,6 +25,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Do any additional setup after loading the view.
 
         startApplication(changeLayoutButton: changeLayoutButton)
+        buttonDesignGridView()
+        buttonDesignLayout()
 
         let device = UIDevice.current
         device.beginGeneratingDeviceOrientationNotifications()
@@ -238,6 +240,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             UIButton.animate(withDuration: 0.2, animations: {
                                 sender.transform = CGAffineTransform.identity})
         })
+    }
+
+    private func buttonDesignGridView() {
+        for button in gridViewButton {
+            button.layer.cornerRadius = 4
+            button.clipsToBounds = true
+        }
+    }
+
+    private func buttonDesignLayout() {
+        for button in changeLayoutButton {
+            button.layer.cornerRadius = 3
+            button.clipsToBounds = true
+        }
     }
 
     private func activityViewController(_ sender: UISwipeGestureRecognizer) {
