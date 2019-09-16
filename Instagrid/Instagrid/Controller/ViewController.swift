@@ -38,17 +38,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(deviceOrientationChanged),
                                        name: Notification.Name("UIDeviceOrientationDidChangeNotification"), object: nil)
-
-        checkInterfaceOrientation(interfaceOrientation: UIApplication.shared.statusBarOrientation)
-
-        // implementing recognition of swipe for up and left movements
-        let upRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
-        upRecognizer.direction = .up
-        self.view.addGestureRecognizer(upRecognizer)
-
-        let leftRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
-        leftRecognizer.direction = .left
-        self.view.addGestureRecognizer(leftRecognizer)
     }
 
     // MARK: - @IBAction methods for swipe, layout buttons and grid view buttons
@@ -57,21 +46,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
         imageNotChosen(sender)
         let orientation = UIDevice.current.orientation
-            switch orientation {
-            case .portrait, .portraitUpsideDown:
-            if orientation.isPortrait {
-                sender.direction = .up
-                animateSwipe(translationX: 0, y: -view.frame.height)
-                activityViewController(sender)
-            }
-            case .landscapeLeft, .landscapeRight:
-            if orientation.isLandscape {
-                sender.direction = .left
-                animateSwipe(translationX: -view.frame.width, y: 0)
-                activityViewController(sender)
-                }
-            default:
-            break
+        if orientation.isPortrait {
+//            changeSwipeBasedOnOrientation(isPortrait: true)
+            animateSwipe(translationX: 0, y: -view.frame.height)
+            activityViewController(sender)
+        } else {
+//            changeSwipeBasedOnOrientation(isPortrait: false)
+            animateSwipe(translationX: -view.frame.width, y: 0)
+            activityViewController(sender)
         }
     }
 
@@ -85,19 +67,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 hidingButtonInPictureView(topRightButtonIsHidden: true, bottomRightButtonIsHidden: false)
                 sender.isSelected = true
                 sender.setImage(UIImage(named: "Selected"), for: .selected)
-                disableLayoutButton(changeLayoutButton: changeLayoutButton, value: 0, isSelected: false)
+                gridView.disableLayoutButton(changeLayoutButton: changeLayoutButton, value: 0, isSelected: false)
             case 1:
                 // for the middle button, concerning layout 2
                 hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: true)
                 sender.isSelected = true
                 sender.setImage(UIImage(named: "Selected"), for: .selected)
-                disableLayoutButton(changeLayoutButton: changeLayoutButton, value: 1, isSelected: false)
+                gridView.disableLayoutButton(changeLayoutButton: changeLayoutButton, value: 1, isSelected: false)
             case 2:
                 // for the right button, concerning layout 3
                 hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: false)
                 sender.isSelected = true
                 sender.setImage(UIImage(named: "Selected"), for: .selected)
-                disableLayoutButton(changeLayoutButton: changeLayoutButton, value: 2, isSelected: false)
+               gridView.disableLayoutButton(changeLayoutButton: changeLayoutButton, value: 2, isSelected: false)
             default:
                 break
             }
@@ -113,7 +95,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         let myAlert = UIAlertController(title: "Select Image from", message: "", preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerController.SourceType.camera
@@ -122,10 +104,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 imagePicker.allowsEditing = true
                 self.imagePicked = sender.tag
                 self.present(imagePicker, animated: true, completion: nil)
-            }
         }
         let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (_) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
+
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
@@ -133,14 +114,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 imagePicker.allowsEditing = true
                 self.imagePicked = sender.tag
                 self.present(imagePicker, animated: true, completion: nil)
-            }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             self.dismiss(animated: true, completion: nil)
         }
         cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
-        myAlert.addAction(cameraAction)
-        myAlert.addAction(photoLibraryAction)
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+                myAlert.addAction(cameraAction)
+    }
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
+                myAlert.addAction(photoLibraryAction)
+        }
         myAlert.addAction(cancelAction)
         self.present(myAlert, animated: true)
     }
@@ -162,42 +146,41 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: - @obj methods
 
     @objc func deviceOrientationChanged() {
-        inspectDeviceOrientation()
+        let isPortrait = interfaceOrientationIsPortrait(interfaceOrientation: UIApplication.shared.statusBarOrientation)
+        changeLabelBasedOnOrientation(isPortrait: isPortrait)
+        changeSwipeBasedOnOrientation(isPortrait: isPortrait)
     }
 
     // MARK: - private methods
 
     // different interface orientation calls for different text to display on screen
-   private func checkInterfaceOrientation(interfaceOrientation: UIInterfaceOrientation) {
+   private func interfaceOrientationIsPortrait(interfaceOrientation: UIInterfaceOrientation) -> Bool {
 
         switch interfaceOrientation {
-        case .portrait, .portraitUpsideDown:
-            if interfaceOrientation.isPortrait {
-                labelForSwipe.text = "Swipe up to share"
-            }
-        case .landscapeLeft, .landscapeRight:
-            if interfaceOrientation.isLandscape {
-                labelForSwipe.text = "Swipe left to share"
-            }
+        case .portrait:
+            return true
         default:
-            break
+            return false
         }
     }
 
-    // different device orientation calls for different text displayed on screen
-    private func inspectDeviceOrientation() {
-        let orientation = UIDevice.current.orientation
-        switch orientation {
-        case .portrait, .portraitUpsideDown:
-            if orientation.isPortrait {
-                labelForSwipe.text = "Swipe up to share"
-            }
-        case .landscapeRight, .landscapeLeft:
-            if orientation.isLandscape {
-                labelForSwipe.text = "Swipe left to share"
-            }
-        default:
-            break
+    private func changeLabelBasedOnOrientation(isPortrait: Bool) {
+        if isPortrait {
+            labelForSwipe.text = "Swipe up to share"
+        } else {
+            labelForSwipe.text = "Swipe left to share"
+        }
+    }
+
+    private func changeSwipeBasedOnOrientation(isPortrait: Bool) {
+        if isPortrait {
+            let upRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
+            upRecognizer.direction = .up
+            self.view.addGestureRecognizer(upRecognizer)
+        } else {
+            let leftRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
+            leftRecognizer.direction = .left
+            self.view.addGestureRecognizer(leftRecognizer)
         }
     }
 
@@ -207,20 +190,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         gridViewButton[3].isHidden = bottomRightButtonIsHidden
     }
 
-    // disabling button aside from the selected button
-   private func disableLayoutButton(changeLayoutButton: [UIButton], value: Int, isSelected: Bool) {
-    for button in changeLayoutButton where button.tag != value {
-                button.isSelected = isSelected
-        }
-    }
-
     // starting application with the middle layout button selected and disabling the others
     private func startApplication(changeLayoutButton: [UIButton]) {
         for button in changeLayoutButton where button.tag == 1 {
                 hidingButtonInPictureView(topRightButtonIsHidden: false, bottomRightButtonIsHidden: true)
                 button.isSelected = true
                 button.setImage(UIImage(named: "Selected"), for: .selected)
-                disableLayoutButton(changeLayoutButton: changeLayoutButton, value: 1, isSelected: false)
+                gridView.disableLayoutButton(changeLayoutButton: changeLayoutButton, value: 1, isSelected: false)
         }
     }
 
@@ -232,15 +208,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     // resting view in layout through an animation and setting all buttons to their beginning images
-    private func resetLayout(_ sender: UISwipeGestureRecognizer) {
+    private func resetLayout(_ sender: UISwipeGestureRecognizer, isError: Bool) {
         UIView.animate(withDuration: 0.5, animations: {
                 self.gridView.transform = CGAffineTransform(translationX: 0, y: 0)
             })
-        startApplication(changeLayoutButton: changeLayoutButton)
-        for button in gridViewButton {
-            button.setImage(UIImage(named: "Plus"), for: .normal)
-            button.imageView?.contentMode = .scaleAspectFill
-            button.clipsToBounds = true
+        if !isError {
+            startApplication(changeLayoutButton: changeLayoutButton)
+            for button in gridViewButton {
+                button.setImage(UIImage(named: "Plus"), for: .normal)
+                button.imageView?.contentMode = .scaleAspectFill
+                button.clipsToBounds = true
+            }
         }
     }
 
@@ -286,17 +264,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 alert.addAction(UIAlertAction(title: "Awesome!",
                                               style: UIAlertAction.Style.default,
                                               handler: {(_: UIAlertAction!) in
-                                                self.resetLayout(sender)
+                                                self.resetLayout(sender, isError: true )
                                                 self.startApplication(changeLayoutButton: self.changeLayoutButton)
                 }))
                 self.present(alert, animated: true, completion: nil)
                 return
             } else {
                 // if the user quits before sharing, an error is presented and the layout is reset
-                let message = "Something wrong happened, please try again"
+                let message = "Your image did not get shared, please try again"
                 let error = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
                 error.addAction(UIAlertAction(title: "Ok", style: .default, handler: {(_: UIAlertAction!) in
-                    self.resetLayout(sender)
+                    self.resetLayout(sender, isError: true)
                 }))
 
                 self.present(error, animated: true, completion: nil)
@@ -309,10 +287,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let image = UIImage(named: "Plus")
         for button in gridViewButton where button.isHidden == false && button.currentImage == image {
                     let message = "You didn't choose images!"
-            // displaying an error when the grid is not full and resetting layout 
+            // displaying an error when the grid is not full
                     let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Choose an image", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
-                                                    self.resetLayout(sender)
+                                                    self.resetLayout(sender, isError: true)
                     }))
                     self.present(alert, animated: true, completion: nil)
         }
