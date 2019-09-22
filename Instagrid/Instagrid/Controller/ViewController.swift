@@ -47,11 +47,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageNotChosen(sender)
         let orientation = UIDevice.current.orientation
         if orientation.isPortrait {
-//            changeSwipeBasedOnOrientation(isPortrait: true)
             animateSwipe(translationX: 0, y: -view.frame.height)
             activityViewController(sender)
         } else {
-//            changeSwipeBasedOnOrientation(isPortrait: false)
             animateSwipe(translationX: -view.frame.width, y: 0)
             activityViewController(sender)
         }
@@ -173,14 +171,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     private func changeSwipeBasedOnOrientation(isPortrait: Bool) {
+        let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
+        self.view.addGestureRecognizer(swipeRecognizer)
+
         if isPortrait {
-            let upRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
-            upRecognizer.direction = .up
-            self.view.addGestureRecognizer(upRecognizer)
+            swipeRecognizer.direction = .up
         } else {
-            let leftRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
-            leftRecognizer.direction = .left
-            self.view.addGestureRecognizer(leftRecognizer)
+            swipeRecognizer.direction = .left
         }
     }
 
@@ -207,7 +204,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         })
     }
 
-    // resting view in layout through an animation and setting all buttons to their beginning images
+    // reseting view in layout through an animation and setting all buttons to their beginning images
     private func resetLayout(_ sender: UISwipeGestureRecognizer, isError: Bool) {
         UIView.animate(withDuration: 0.5, animations: {
                 self.gridView.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -270,7 +267,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 self.present(alert, animated: true, completion: nil)
                 return
             } else {
-                // if the user quits before sharing, an error is presented and the layout is reset
+                // if the user quits before sharing, an error is presented
                 let message = "Your image did not get shared, please try again"
                 let error = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
                 error.addAction(UIAlertAction(title: "Ok", style: .default, handler: {(_: UIAlertAction!) in
