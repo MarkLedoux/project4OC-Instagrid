@@ -269,11 +269,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 let message = "Your image has been shared"
                 let alert = UIAlertController(title: "Great!", message: message, preferredStyle: .alert)
 
-                alert.addAction(UIAlertAction(title: "Awesome!",
-                                              style: UIAlertAction.Style.default,
-                                              handler: {(_: UIAlertAction!) in
-                                                self.resetLayout(isError: false)
-                                                self.startApplication(changeLayoutButton: self.changeLayoutButton)
+                alert.addAction(UIAlertAction(title: "Awesome!", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+                    self.resetLayout(isError: false)
+                    self.startApplication(changeLayoutButton: self.changeLayoutButton)
                 }))
                 self.present(alert, animated: true, completion: nil)
                 return
