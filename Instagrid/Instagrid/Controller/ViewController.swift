@@ -38,20 +38,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(deviceOrientationChanged),
                                        name: Notification.Name("UIDeviceOrientationDidChangeNotification"), object: nil)
+
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
+
+        swipeUp.direction = .up
+        swipeLeft.direction = .left
+
+        self.view.addGestureRecognizer(swipeUp)
+        self.view.addGestureRecognizer(swipeLeft)
+
+
     }
 
     // MARK: - @IBAction methods for swipe, layout buttons and grid view buttons
 
     //implementing two possible cases when the swipe is made, those vary through the interface and device orientation
+
+    // TODO: - imageNotChosen is now broken even though i've limited the swipe to only work for up and left in their correct orientation
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
-        imageNotChosen(sender)
         let orientation = UIDevice.current.orientation
         if orientation.isPortrait {
-            animateSwipe(translationX: 0, y: -view.frame.height)
-            activityViewController(sender)
+            imageNotChosen(sender)
+            if (sender.direction == .up) {
+                animateSwipe(translationX: 0, y: -view.frame.height)
+                activityViewController(sender)
+            } else {
+                print("unrecognized swipe direction")
+            }
         } else {
-            animateSwipe(translationX: -view.frame.width, y: 0)
-            activityViewController(sender)
+            imageNotChosen(sender)
+            if (sender.direction == .left) {
+                animateSwipe(translationX: -view.frame.width, y: 0)
+                activityViewController(sender)
+            } else {
+                print("unrecognized swipe direction")
+            }
         }
     }
 
@@ -171,13 +193,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     private func changeSwipeBasedOnOrientation(isPortrait: Bool) {
-        let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeMade(_:)))
-        self.view.addGestureRecognizer(swipeRecognizer)
 
         if isPortrait {
-            swipeRecognizer.direction = .up
+
         } else {
-            swipeRecognizer.direction = .left
+
         }
     }
 
