@@ -57,10 +57,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     // TODO: - imageNotChosen is now broken even though i've limited the swipe to only work for up and left in their correct orientation
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
+        imageNotChosen()
         let orientation = UIDevice.current.orientation
         switch orientation {
         case .portrait:
-            imageNotChosen(sender)
             if (sender.direction == .up) {
                 animateSwipe(translationX: 0, y: -view.frame.height)
                 activityViewController(sender)
@@ -69,6 +69,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         default:
             if (sender.direction == .left) {
+                imageNotChosen()
                 animateSwipe(translationX: -view.frame.width, y: 0)
                 activityViewController(sender)
             } else {
@@ -223,7 +224,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     // reseting view in layout through an animation and setting all buttons to their beginning images
-    private func resetLayout(_ sender: UISwipeGestureRecognizer, isError: Bool) {
+    private func resetLayout(isError: Bool) {
         UIView.animate(withDuration: 0.5, animations: {
                 self.gridView.transform = CGAffineTransform(translationX: 0, y: 0)
             })
@@ -279,7 +280,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 alert.addAction(UIAlertAction(title: "Awesome!",
                                               style: UIAlertAction.Style.default,
                                               handler: {(_: UIAlertAction!) in
-                                                self.resetLayout(sender, isError: true )
+                                                self.resetLayout(isError: true )
                                                 self.startApplication(changeLayoutButton: self.changeLayoutButton)
                 }))
                 self.present(alert, animated: true, completion: nil)
@@ -289,7 +290,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 let message = "Your image did not get shared, please try again"
                 let error = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
                 error.addAction(UIAlertAction(title: "Ok", style: .default, handler: {(_: UIAlertAction!) in
-                    self.resetLayout(sender, isError: true)
+                    self.resetLayout(isError: true)
                 }))
 
                 self.present(error, animated: true, completion: nil)
@@ -298,16 +299,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     // checks if the user has filled all showing buttons wih different images than those use by default when the app starts
-    private func imageNotChosen(_ sender: UISwipeGestureRecognizer) {
+    private func imageNotChosen() {
         let image = UIImage(named: "Plus")
-        for button in gridViewButton where button.isHidden == false && button.currentImage == image {
-            let message = "You didn't choose images!"
-            // displaying an error when the grid is not full
-            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Choose an image", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
-                self.resetLayout(sender, isError: true)
-            }))
-            self.present(alert, animated: true, completion: nil)
+        for button in gridViewButton where button.isHidden == false {
+            print("image not chosen")
+            print(image)
+            print(button.currentImage)
+            print(button.image(for: .normal))
+            if button.image(for: .normal) == image {
+                let message = "You didn't choose images!"
+                //displaying an error when the grid is not full
+                let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Choose an image", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+                    self.resetLayout(isError: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
 }
