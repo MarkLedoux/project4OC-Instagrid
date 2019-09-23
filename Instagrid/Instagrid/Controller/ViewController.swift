@@ -169,7 +169,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @objc func deviceOrientationChanged() {
         let isPortrait = interfaceOrientationIsPortrait(interfaceOrientation: UIApplication.shared.statusBarOrientation)
         changeLabelBasedOnOrientation(isPortrait: isPortrait)
-        changeSwipeBasedOnOrientation(isPortrait: isPortrait)
     }
 
     // MARK: - private methods
@@ -190,13 +189,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             labelForSwipe.text = "Swipe up to share"
         } else {
             labelForSwipe.text = "Swipe left to share"
-        }
-    }
-
-    // function is unused for now?
-    private func changeSwipeBasedOnOrientation(isPortrait: Bool) {
-        if isPortrait {
-        } else {
         }
     }
 
