@@ -57,11 +57,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     // TODO: - imageNotChosen is now broken even though i've limited the swipe to only work for up and left in their correct orientation
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
-        imageNotChosen()
         let orientation = UIDevice.current.orientation
         switch orientation {
         case .portrait:
             if (sender.direction == .up) {
+                imageNotChosen()
                 animateSwipe(translationX: 0, y: -view.frame.height)
                 activityViewController(sender)
             } else {
@@ -293,12 +293,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // checks if the user has filled all showing buttons wih different images than those use by default when the app starts
     private func imageNotChosen() {
         let image = UIImage(named: "Plus")
-        for button in gridViewButton where button.isHidden == false {
-            print("image not chosen")
-            print(image)
-            print(button.currentImage)
-            print(button.image(for: .normal))
-            if button.image(for: .normal) == image {
+        for button in gridViewButton where (button.isHidden == false) && (button.currentImage == image) {
                 let message = "You didn't choose images!"
                 //displaying an error when the grid is not full
                 let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
@@ -306,7 +301,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     self.resetLayout(isError: true)
                 }))
                 self.present(alert, animated: true, completion: nil)
-            }
         }
     }
 }
