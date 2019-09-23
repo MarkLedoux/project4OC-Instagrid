@@ -272,7 +272,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 alert.addAction(UIAlertAction(title: "Awesome!",
                                               style: UIAlertAction.Style.default,
                                               handler: {(_: UIAlertAction!) in
-                                                self.resetLayout(isError: true )
+                                                self.resetLayout(isError: false)
                                                 self.startApplication(changeLayoutButton: self.changeLayoutButton)
                 }))
                 self.present(alert, animated: true, completion: nil)
