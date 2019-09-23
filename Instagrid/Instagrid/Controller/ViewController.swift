@@ -57,10 +57,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     // TODO: - imageNotChosen is now broken even though i've limited the swipe to only work for up and left in their correct orientation
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
-        imageNotChosen(sender)
         let orientation = UIDevice.current.orientation
         switch orientation {
         case .portrait:
+            imageNotChosen(sender)
             if (sender.direction == .up) {
                 animateSwipe(translationX: 0, y: -view.frame.height)
                 activityViewController(sender)
@@ -73,7 +73,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 activityViewController(sender)
             } else {
                 print("unrecognized swipe direction")
-                
             }
         }
     }
@@ -193,12 +192,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
+    // function is unused for now?
     private func changeSwipeBasedOnOrientation(isPortrait: Bool) {
-
         if isPortrait {
-
         } else {
-
         }
     }
 
@@ -304,13 +301,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     private func imageNotChosen(_ sender: UISwipeGestureRecognizer) {
         let image = UIImage(named: "Plus")
         for button in gridViewButton where button.isHidden == false && button.currentImage == image {
-                    let message = "You didn't choose images!"
+            let message = "You didn't choose images!"
             // displaying an error when the grid is not full
-                    let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Choose an image", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
-                                                    self.resetLayout(sender, isError: true)
-                    }))
-                    self.present(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Choose an image", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+                self.resetLayout(sender, isError: true)
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }
