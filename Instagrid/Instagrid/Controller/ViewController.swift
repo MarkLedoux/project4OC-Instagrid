@@ -57,22 +57,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     // TODO: - imageNotChosen is now broken even though i've limited the swipe to only work for up and left in their correct orientation
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
+        imageNotChosen(sender)
         let orientation = UIDevice.current.orientation
-        if orientation.isPortrait {
-            imageNotChosen(sender)
+        switch orientation {
+        case .portrait:
             if (sender.direction == .up) {
                 animateSwipe(translationX: 0, y: -view.frame.height)
                 activityViewController(sender)
             } else {
-                print("unrecognized swipe direction")
+            print("unrecognized swipe direction")
             }
-        } else {
-            imageNotChosen(sender)
+        default:
             if (sender.direction == .left) {
                 animateSwipe(translationX: -view.frame.width, y: 0)
                 activityViewController(sender)
             } else {
                 print("unrecognized swipe direction")
+                
             }
         }
     }
