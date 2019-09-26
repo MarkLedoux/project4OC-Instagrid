@@ -54,8 +54,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: - @IBAction methods for swipe, layout buttons and grid view buttons
 
     //implementing two possible cases when the swipe is made, those vary through the interface and device orientation
-
-    // TODO: - imageNotChosen is now broken even though i've limited the swipe to only work for up and left in their correct orientation
+    // feature seems to bug in iOS 13.0 simulator but works perfectly in iOS 12.2 simulator
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
         let orientation = UIDevice.current.orientation
         switch orientation {
