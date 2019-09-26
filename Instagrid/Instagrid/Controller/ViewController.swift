@@ -185,11 +185,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     private func changeLabelBasedOnOrientation(isPortrait: Bool) {
-        if isPortrait {
-            labelForSwipe.text = "Swipe up to share"
-        } else {
-            labelForSwipe.text = "Swipe left to share"
-        }
+        isPortrait ? (labelForSwipe.text = "Swipe up to share") : (labelForSwipe.text = "Swipe left to share")
     }
 
     // boolean parameters to hide buttons in grid view, used in with the layout buttons
