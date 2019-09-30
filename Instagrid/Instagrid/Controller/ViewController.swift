@@ -286,7 +286,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // checks if the user has filled all showing buttons wih different images than those use by default when the app starts
     private func imageNotChosen() {
         let image = UIImage(named: "Plus")
-        for button in gridViewButton where (button.isHidden == false) && (button.currentImage == image) {
+        for button in gridViewButton where (button.isHidden == false) && (button.currentImage?.imageAsset == image?.imageAsset) {
                 let message = "You didn't choose images!"
                 //displaying an error when the grid is not full
                 let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
