@@ -15,7 +15,6 @@
 		B3A8F8022321C268001C587A /* PictureGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8F8012321C268001C587A /* PictureGridView.swift */; };
 		B3DC4348230C5A8D00DD10CF /* Delm-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3DC4346230C5A8D00DD10CF /* Delm-Medium.otf */; };
 		B3DC4349230C5A8D00DD10CF /* ThirstySoftRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3DC4347230C5A8D00DD10CF /* ThirstySoftRegular.otf */; };
-		B3FE75092316F93C00E54E84 /* PictureGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE75082316F93C00E54E84 /* PictureGrid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +28,6 @@
 		B3A8F8012321C268001C587A /* PictureGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PictureGridView.swift; path = Instagrid/View/PictureGridView.swift; sourceTree = SOURCE_ROOT; };
 		B3DC4346230C5A8D00DD10CF /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delm-Medium.otf"; sourceTree = "<group>"; };
 		B3DC4347230C5A8D00DD10CF /* ThirstySoftRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ThirstySoftRegular.otf; sourceTree = "<group>"; };
-		B3FE75082316F93C00E54E84 /* PictureGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureGrid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +101,6 @@
 		B381F625230D21420099F96D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B3FE75082316F93C00E54E84 /* PictureGrid.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -181,7 +178,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3FE75092316F93C00E54E84 /* PictureGrid.swift in Sources */,
 				B3A8F8022321C268001C587A /* PictureGridView.swift in Sources */,
 				B3678BFE230C481A000BEED9 /* ViewController.swift in Sources */,
 				B3678BFC230C481A000BEED9 /* AppDelegate.swift in Sources */,

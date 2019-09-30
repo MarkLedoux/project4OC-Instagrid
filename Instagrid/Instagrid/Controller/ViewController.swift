@@ -19,7 +19,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet var gridView: PictureGridView!
 
     // MARK: - Properties
-    var pictureGrid = PictureGrid()
     var images = [UIImage]()
     var imagePicked = 0
 
@@ -253,7 +252,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     // opening activity view controller after the swipe is made
     private func activityViewController(_ sender: UISwipeGestureRecognizer) {
-        let image = pictureGrid.combineImage(gridView: gridView)
+        let image = gridView.combineImage(gridView: gridView)
         let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.view
         activityVC.view.layoutIfNeeded()
